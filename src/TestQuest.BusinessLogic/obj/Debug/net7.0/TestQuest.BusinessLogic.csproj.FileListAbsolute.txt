@@ -1,0 +1,15 @@
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\bin\Debug\net7.0\TestQuest.BusinessLogic.deps.json
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\bin\Debug\net7.0\TestQuest.BusinessLogic.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\bin\Debug\net7.0\TestQuest.BusinessLogic.pdb
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\bin\Debug\net7.0\TestQuest.DataAccess.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\bin\Debug\net7.0\TestQuest.DataAccess.pdb
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.AssemblyInfo.cs
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.csproj.CopyComplete
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\refint\TestQuest.BusinessLogic.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\TestQuest.BusinessLogic.pdb
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.BusinessLogic\obj\Debug\net7.0\ref\TestQuest.BusinessLogic.dll
