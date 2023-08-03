@@ -34,3 +34,15 @@ C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\re
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\TestQuest.Presentation.pdb
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\TestQuest.Presentation.genruntimeconfig.cache
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\ref\TestQuest.Presentation.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\System.Web.Http.WebHost.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Swashbuckle.Core.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\WebActivatorEx.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\TestQuest.Presentation.MvcApplicationPartsAssemblyInfo.cs
