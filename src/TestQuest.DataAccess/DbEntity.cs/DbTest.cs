@@ -7,7 +7,7 @@ public record DbTest : BaseDbEntity
     private readonly byte? _timeLimit;
     private readonly byte? _totalQuestions;
     private readonly string? _authorId;
-    private readonly DateTime? _creationDate;
+    private readonly DateTime? _createdAt;
     private readonly TestStatus _status;
 
     public string Name
@@ -45,10 +45,10 @@ public record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CreationDate
+    public DateTime CreatedAt
     {
-        get => _creationDate ?? new DateTime();
-        init => _creationDate = value >= DateTime.Now
+        get => _createdAt ?? new DateTime();
+        init => _createdAt = value >= DateTime.Now
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
