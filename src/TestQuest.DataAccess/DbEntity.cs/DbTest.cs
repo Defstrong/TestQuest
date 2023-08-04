@@ -1,6 +1,6 @@
 namespace TestQuest.DataAccess;
 
-public record DbTest : BaseDbEntity
+public sealed record DbTest : BaseDbEntity
 {
     private readonly string? _name;
     private readonly Difficulty _difficulty;
@@ -53,7 +53,7 @@ public record DbTest : BaseDbEntity
     }
 
     public List<string> Category { get; init; } = new();
-    public List<IQuestion> Questions { get; init; } = new();
+    public List<DbQuestion> Questions { get; init; } = new();
 
     public TestStatus Status    
     {

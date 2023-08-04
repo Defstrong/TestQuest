@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TestQuest.DataAccess;
 
-public sealed class CloseQuestionConfiguration : IEntityTypeConfiguration<DbCloseQuestion>
+public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
 {
-    public void Configure(EntityTypeBuilder<DbCloseQuestion> builder)
+    public void Configure(EntityTypeBuilder<DbQuestion> builder)
     {
         builder
             .ToTable("close_question")
@@ -27,8 +27,6 @@ public sealed class CloseQuestionConfiguration : IEntityTypeConfiguration<DbClos
 
         builder
             .Property(q => q.Options)
-            .HasColumnName("options")
-            .IsRequired();
-        
+            .HasColumnName("options");
     }
 }
