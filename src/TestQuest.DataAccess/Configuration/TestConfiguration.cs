@@ -9,7 +9,26 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
         builder
             .ToTable("test")
             .HasKey(t => t.Id);
-        
+
+        builder        
+            .Property(t => t.Id)
+            .HasColumnName("id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
+            .Property(t => t.AuthorId)
+            .HasColumnName("author_id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
+            .Property(t => t.Name)
+            .HasColumnName("name")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(50)
+            .IsRequired();
+
         builder
             .Property(t => t.Difficulty)
             .HasColumnName("difficulty")
@@ -20,28 +39,37 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
         builder
             .Property(t => t.TimeLimit)
             .HasColumnName("time_limit")
-            .HasColumnType("TINYINT")
-            .HasMaxLength(255)
+            .HasColumnType("INT")
             .IsRequired();
 
         builder
             .Property(t => t.TotalQuestions)
             .HasColumnName("total_questions")
-            .HasColumnType("TINYINT")
-            .HasMaxLength(255)
+            .HasColumnType("INT")
             .IsRequired();
 
         builder
             .Property(t => t.TotalQuestions)
             .HasColumnName("total_questions")
-            .HasColumnType("TINYINT")
-            .HasMaxLength(255)
+            .HasColumnType("INT")
             .IsRequired();
 
         builder
             .Property(t => t.CreatedAt)
             .HasColumnName("created_at")
-            .HasColumnType("DATETIME")
+            .HasColumnType("DATE")
+            .IsRequired();
+
+        builder
+            .Property(t => t.Category)
+            .HasColumnName("category")
+            .IsRequired();
+
+        builder
+            .Property(t => t.Status)
+            .HasColumnName("status")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(20)
             .IsRequired();
     }
 }

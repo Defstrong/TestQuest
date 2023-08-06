@@ -13,7 +13,7 @@ using TestQuest.DataAccess;
 namespace TestQuest.DataAccess.Migrations
 {
     [DbContext(typeof(TestQuestDbContext))]
-    [Migration("20230804200530_InitialMigration")]
+    [Migration("20230806115409_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -29,7 +29,8 @@ namespace TestQuest.DataAccess.Migrations
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
 
                     b.Property<string>("Answer")
                         .IsRequired()
@@ -38,11 +39,11 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnName("answer");
 
                     b.Property<string>("DbTestId")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR");
 
                     b.Property<List<string>>("Options")
                         .IsRequired()
-                        .HasColumnType("text[]")
+                        .HasColumnType("VARCHAR[]")
                         .HasColumnName("options");
 
                     b.Property<string>("Question")
@@ -55,21 +56,21 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.HasIndex("DbTestId");
 
-                    b.ToTable("close_question", (string)null);
+                    b.ToTable("question", (string)null);
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbResultTest", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CompletedAt")
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("DATE")
                         .HasColumnName("completed_at");
 
-                    b.Property<byte>("CorrectAnswers")
-                        .HasMaxLength(255)
-                        .HasColumnType("TINYINT")
+                    b.Property<int>("CorrectAnswers")
+                        .HasColumnType("INT")
                         .HasColumnName("correct_answers");
 
                     b.Property<string>("Result")
@@ -80,7 +81,7 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("id_user");
 
                     b.HasKey("Id");
@@ -91,18 +92,21 @@ namespace TestQuest.DataAccess.Migrations
             modelBuilder.Entity("TestQuest.DataAccess.DbTest", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
 
                     b.Property<string>("AuthorId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("author_id");
 
                     b.Property<List<string>>("Category")
                         .IsRequired()
-                        .HasColumnType("text[]");
+                        .HasColumnType("text[]")
+                        .HasColumnName("category");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("DATE")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Difficulty")
@@ -113,19 +117,22 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("name");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("status");
 
-                    b.Property<byte>("TimeLimit")
-                        .HasMaxLength(255)
-                        .HasColumnType("TINYINT")
+                    b.Property<int>("TimeLimit")
+                        .HasColumnType("INT")
                         .HasColumnName("time_limit");
 
-                    b.Property<byte>("TotalQuestions")
-                        .HasMaxLength(255)
-                        .HasColumnType("TINYINT")
+                    b.Property<int>("TotalQuestions")
+                        .HasColumnType("INT")
                         .HasColumnName("total_questions");
 
                     b.HasKey("Id");
@@ -136,15 +143,17 @@ namespace TestQuest.DataAccess.Migrations
             modelBuilder.Entity("TestQuest.DataAccess.DbUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
 
-                    b.Property<int[]>("Achievements")
+                    b.Property<string[]>("Achievements")
                         .IsRequired()
-                        .HasColumnType("integer[]");
+                        .HasColumnType("VARCHAR[]")
+                        .HasColumnName("achievements");
 
-                    b.Property<byte>("Age")
+                    b.Property<int>("Age")
                         .HasMaxLength(150)
-                        .HasColumnType("TINYINT")
+                        .HasColumnType("INT")
                         .HasColumnName("age");
 
                     b.Property<string>("Gender")
@@ -160,11 +169,12 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnName("name");
 
                     b.Property<int>("RatingPoints")
-                        .HasColumnType("integer");
+                        .HasColumnType("INT")
+                        .HasColumnName("rating_points");
 
                     b.HasKey("Id");
 
-                    b.ToTable("user", (string)null);
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>

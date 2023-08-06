@@ -16,75 +16,75 @@ namespace TestQuest.DataAccess.Migrations
                 name: "result_test",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    id_user = table.Column<string>(type: "text", nullable: false),
-                    correct_answers = table.Column<byte>(type: "TINYINT", maxLength: 255, nullable: false),
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    id_user = table.Column<string>(type: "VARCHAR", nullable: false),
+                    correct_answers = table.Column<int>(type: "INT", nullable: false),
                     result = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
-                    completed_at = table.Column<DateTime>(type: "DATETIME", nullable: false)
+                    completed_at = table.Column<DateTime>(type: "DATE", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_result_test", x => x.Id);
+                    table.PrimaryKey("PK_result_test", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "test",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    name = table.Column<string>(type: "VARCHAR", maxLength: 50, nullable: false),
                     difficulty = table.Column<string>(type: "VARCHAR", maxLength: 30, nullable: false),
-                    time_limit = table.Column<byte>(type: "TINYINT", maxLength: 255, nullable: false),
-                    total_questions = table.Column<byte>(type: "TINYINT", maxLength: 255, nullable: false),
-                    AuthorId = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    Category = table.Column<List<string>>(type: "text[]", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false)
+                    time_limit = table.Column<int>(type: "INT", nullable: false),
+                    total_questions = table.Column<int>(type: "INT", nullable: false),
+                    author_id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    created_at = table.Column<DateTime>(type: "DATE", nullable: false),
+                    category = table.Column<List<string>>(type: "text[]", nullable: false),
+                    status = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_test", x => x.Id);
+                    table.PrimaryKey("PK_test", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user",
+                name: "users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false),
                     gender = table.Column<string>(type: "VARCHAR", maxLength: 10, nullable: false),
-                    age = table.Column<byte>(type: "TINYINT", maxLength: 150, nullable: false),
-                    RatingPoints = table.Column<int>(type: "integer", nullable: false),
-                    Achievements = table.Column<int[]>(type: "integer[]", nullable: false)
+                    age = table.Column<int>(type: "INT", maxLength: 150, nullable: false),
+                    rating_points = table.Column<int>(type: "INT", nullable: false),
+                    achievements = table.Column<string[]>(type: "VARCHAR[]", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user", x => x.Id);
+                    table.PrimaryKey("PK_users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "close_question",
+                name: "question",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
                     question = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     answer = table.Column<string>(type: "VARCHAR", maxLength: 100, nullable: false),
-                    options = table.Column<List<string>>(type: "text[]", nullable: false),
-                    DbTestId = table.Column<string>(type: "text", nullable: true)
+                    options = table.Column<List<string>>(type: "VARCHAR[]", nullable: false),
+                    DbTestId = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_close_question", x => x.Id);
+                    table.PrimaryKey("PK_question", x => x.id);
                     table.ForeignKey(
-                        name: "FK_close_question_test_DbTestId",
+                        name: "FK_question_test_DbTestId",
                         column: x => x.DbTestId,
                         principalTable: "test",
-                        principalColumn: "Id");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_close_question_DbTestId",
-                table: "close_question",
+                name: "IX_question_DbTestId",
+                table: "question",
                 column: "DbTestId");
         }
 
@@ -92,13 +92,13 @@ namespace TestQuest.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "close_question");
+                name: "question");
 
             migrationBuilder.DropTable(
                 name: "result_test");
 
             migrationBuilder.DropTable(
-                name: "user");
+                name: "users");
 
             migrationBuilder.DropTable(
                 name: "test");

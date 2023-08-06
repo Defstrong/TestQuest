@@ -11,16 +11,21 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
             .HasKey(rt => rt.Id);
 
         builder
+            .Property(rt => rt.Id)
+            .HasColumnName("id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
             .Property(rt => rt.CompletedAt)
             .HasColumnName("completed_at")
-            .HasColumnType("DATETIME")
+            .HasColumnType("DATE")
             .IsRequired();
 
         builder
             .Property(rt => rt.CorrectAnswers)
             .HasColumnName("correct_answers")
-            .HasColumnType("TINYINT")
-            .HasMaxLength(255);
+            .HasColumnType("INT");
         
         builder
             .Property(rt => rt.Result)
@@ -32,6 +37,7 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
         builder
             .Property(rt => rt.UserId)
             .HasColumnName("id_user")
+            .HasColumnType("VARCHAR")
             .IsRequired();
     }
 }

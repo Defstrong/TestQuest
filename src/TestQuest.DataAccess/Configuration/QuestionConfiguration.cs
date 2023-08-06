@@ -8,8 +8,14 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
     public void Configure(EntityTypeBuilder<DbQuestion> builder)
     {
         builder
-            .ToTable("close_question")
-            .HasKey(k => k.Id);
+            .ToTable("question")
+            .HasKey(q => q.Id);
+
+        builder
+            .Property(q => q.Id)
+            .HasColumnName("id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
 
         builder
             .Property(q => q.Answer)
@@ -27,6 +33,8 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
 
         builder
             .Property(q => q.Options)
-            .HasColumnName("options");
+            .HasColumnName("options")
+            .HasColumnType("VARCHAR[]");
+        
     }
 }

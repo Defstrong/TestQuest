@@ -7,8 +7,14 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
     public void Configure(EntityTypeBuilder<DbUser> builder)
     {
         builder
-            .ToTable("user")
+            .ToTable("users")
             .HasKey(u => u.Id);
+        
+        builder
+            .Property(u => u.Id)
+            .HasColumnName("id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
 
         builder
             .Property(u => u.Name)
@@ -27,8 +33,18 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
         builder
             .Property(u => u.Age)
             .HasColumnName("age")
-            .HasColumnType("TINYINT")
+            .HasColumnType("INT")
             .HasMaxLength(150)
             .IsRequired();
+
+        builder
+            .Property(u => u.RatingPoints)
+            .HasColumnName("rating_points")
+            .HasColumnType("INT");
+
+        builder
+            .Property(u => u.Achievements)
+            .HasColumnName("achievements")
+            .HasColumnType("VARCHAR[]");
     }
 }
