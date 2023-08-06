@@ -1,14 +1,14 @@
 using System.Reflection;
-using Npgsql;
 using Microsoft.EntityFrameworkCore;
 namespace TestQuest.DataAccess;
 
 public sealed class TestQuestDbContext : DbContext
 {
-    public DbSet<DbQuestion> CloseQuestion => Set<DbQuestion>();
+    public DbSet<DbQuestion> Questions => Set<DbQuestion>();
     public DbSet<DbResultTest> ResultTests => Set<DbResultTest>();
     public DbSet<DbTest> Tests => Set<DbTest>();
     public DbSet<DbUser> Users => Set<DbUser>();
+    public DbSet<DbUserAuthorize> UsersAuthorizes => Set<DbUserAuthorize>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

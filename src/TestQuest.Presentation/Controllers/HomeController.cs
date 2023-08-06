@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TestQuest.Presentation.Models;
+using TestQuest.DataAccess;
 
 namespace TestQuest.Presentation.Controllers;
 
@@ -13,9 +14,10 @@ public class HomeController : Controller
         _logger = logger;
     }
     
-    public IActionResult Index()
+    [HttpGet("index")]
+    public DbTest Index(DbTest test)
     {
-        return View();
+        return test;
     }
 
     public IActionResult Privacy()
