@@ -19,7 +19,7 @@ public sealed class TestRepository : ITestRepository
     {
         DbTest test = await _db.Tests.SingleAsync(q => q.Id == id, token);
         _db.Remove(test);
-        int deleteResult= await _db.SaveChangesAsync(token);
+        int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
     }
 

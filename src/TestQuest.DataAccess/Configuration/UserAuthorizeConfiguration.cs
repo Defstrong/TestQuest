@@ -9,7 +9,7 @@ public sealed class UserAuthorizeConfiguration : IEntityTypeConfiguration<DbUser
         builder
             .ToTable("users_authorize")
             .HasKey(u => u.Id);
-        
+
         builder
             .Property(u => u.Id)
             .HasColumnName("id")

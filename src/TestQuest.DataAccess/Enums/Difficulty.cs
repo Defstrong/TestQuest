@@ -7,5 +7,5 @@ public enum Difficulty : int
     Medium = 2,
     Hight = 3,
     VeryHight = 4,
-    Impissible = 5 
+    Impissible = 5
 }

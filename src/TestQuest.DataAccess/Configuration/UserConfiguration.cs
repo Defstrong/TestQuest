@@ -9,7 +9,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
         builder
             .ToTable("users")
             .HasKey(u => u.Id);
-        
+
         builder
             .Property(u => u.Id)
             .HasColumnName("id")
@@ -29,7 +29,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
             .HasColumnType("VARCHAR")
             .HasMaxLength(10)
             .IsRequired();
-        
+
         builder
             .Property(u => u.Age)
             .HasColumnName("age")

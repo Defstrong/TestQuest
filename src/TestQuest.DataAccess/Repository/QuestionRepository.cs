@@ -19,7 +19,7 @@ public sealed class QuestionRepository : IQuestionRepository
     {
         DbQuestion question = await _db.Questions.SingleAsync(q => q.Id == id, token);
         _db.Remove(question);
-        int deleteResult= await _db.SaveChangesAsync(token);
+        int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
     }
 

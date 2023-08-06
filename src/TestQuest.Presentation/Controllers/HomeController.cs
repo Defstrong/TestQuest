@@ -13,7 +13,7 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-    
+
     [HttpGet("index")]
     public DbTest Index(DbTest test)
     {

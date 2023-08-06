@@ -6,7 +6,7 @@ public sealed class QuestionService : IQuestionService
 {
     private readonly IQuestionRepository _questionRepository;
 
-    public QuestionService(IQuestionRepository questionRepository) 
+    public QuestionService(IQuestionRepository questionRepository)
         => _questionRepository = questionRepository;
 
     public async Task<bool> CreateAsync(QuestionDto model, CancellationToken token = default)

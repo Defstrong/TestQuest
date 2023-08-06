@@ -6,7 +6,7 @@ public sealed class ResultTestService : IResultTestService
 {
     private readonly IResultTestRepository _resultTestRepository;
 
-    public ResultTestService(IResultTestRepository resultTestRepository) 
+    public ResultTestService(IResultTestRepository resultTestRepository)
         => _resultTestRepository = resultTestRepository;
 
     public async Task<bool> CreateAsync(ResultTestDto model, CancellationToken token = default)

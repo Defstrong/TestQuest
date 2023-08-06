@@ -6,7 +6,7 @@ public sealed class TestService : ITestService
 {
     private readonly ITestRepository _testRepository;
 
-    public TestService(ITestRepository testRepository) 
+    public TestService(ITestRepository testRepository)
         => _testRepository = testRepository;
 
     public async Task<bool> CreateAsync(TestDto model, CancellationToken token = default)

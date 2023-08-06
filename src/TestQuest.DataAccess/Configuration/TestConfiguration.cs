@@ -10,7 +10,7 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .ToTable("test")
             .HasKey(t => t.Id);
 
-        builder        
+        builder
             .Property(t => t.Id)
             .HasColumnName("id")
             .HasColumnType("VARCHAR")

@@ -19,14 +19,14 @@ public record UserTestDto : BaseDto
         init => _name = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-    
-    public Difficulty Difficulty 
+
+    public Difficulty Difficulty
     {
         get => _difficulty;
         init => _difficulty = value;
     }
 
-    public byte TimeLimit 
+    public byte TimeLimit
     {
         get => _timeLimit ?? 0;
         init => _timeLimit = value > 0
@@ -70,7 +70,7 @@ public record UserTestDto : BaseDto
 
     public List<string> Category { get; init; } = new();
 
-    public TestStatus Status    
+    public TestStatus Status
     {
         get => _status;
         init => _status = value;

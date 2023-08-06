@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TestQuest.DataAccess;
 
-public sealed class ResultTestRepository : IResultTestRepository 
+public sealed class ResultTestRepository : IResultTestRepository
 {
     private readonly TestQuestDbContext _db;
 

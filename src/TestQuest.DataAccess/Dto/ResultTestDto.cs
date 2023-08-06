@@ -1,13 +1,13 @@
 namespace TestQuest.DataAccess;
 
-public sealed record ResultTestDto : BaseDto 
+public sealed record ResultTestDto : BaseDto
 {
     private readonly string? _userId;
     private readonly byte? _correctAnswers;
     private readonly uint? _result;
     private readonly DateTime? _completedAt;
 
-    public string UserId 
+    public string UserId
     {
         get => _userId ?? string.Empty;
         init => _userId = value is { Length: > 0 }

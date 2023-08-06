@@ -26,14 +26,14 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
             .Property(rt => rt.CorrectAnswers)
             .HasColumnName("correct_answers")
             .HasColumnType("INT");
-        
+
         builder
             .Property(rt => rt.Result)
             .HasColumnName("result")
             .HasColumnType("VARCHAR")
             .HasMaxLength(500)
             .IsRequired();
-        
+
         builder
             .Property(rt => rt.UserId)
             .HasColumnName("id_user")

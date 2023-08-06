@@ -12,7 +12,7 @@ public sealed record DbUserAuthorize : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public string Password 
+    public string Password
     {
         get => _password ?? string.Empty;
         init => _password = value is { Length: > 0 }

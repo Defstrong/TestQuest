@@ -19,7 +19,7 @@ public sealed class UserRepository : IUserRepository
     {
         DbUser user = await _db.Users.SingleAsync(q => q.Id == id, token);
         _db.Remove(user);
-        int deleteResult= await _db.SaveChangesAsync(token);
+        int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
     }
 

@@ -35,6 +35,6 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
             .Property(q => q.Options)
             .HasColumnName("options")
             .HasColumnType("VARCHAR[]");
-        
+
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TestQuest.DataAccess;
 
-public sealed class UserAuthorizeRepository : IUserAuthorizeRepository 
+public sealed class UserAuthorizeRepository : IUserAuthorizeRepository
 {
     private readonly TestQuestDbContext _db;
 
@@ -19,7 +19,7 @@ public sealed class UserAuthorizeRepository : IUserAuthorizeRepository
     {
         DbUserAuthorize userAuthorize = await _db.UsersAuthorizes.SingleAsync(q => q.Id == id, token);
         _db.Remove(userAuthorize);
-        int deleteResult= await _db.SaveChangesAsync(token);
+        int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
     }
 

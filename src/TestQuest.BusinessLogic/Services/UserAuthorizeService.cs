@@ -6,7 +6,7 @@ public sealed class UserAuthorizeService : IUserAuthorizeService
 {
     private readonly IUserAuthorizeRepository _userAuthorizeRepository;
 
-    public UserAuthorizeService(IUserAuthorizeRepository userAuthorizeRepository) 
+    public UserAuthorizeService(IUserAuthorizeRepository userAuthorizeRepository)
         => _userAuthorizeRepository = userAuthorizeRepository;
 
     public async Task<bool> CreateAsync(UserAuthorizeDto model, CancellationToken token = default)
