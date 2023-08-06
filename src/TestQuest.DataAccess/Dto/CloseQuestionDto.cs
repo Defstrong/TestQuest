@@ -1,9 +1,8 @@
 namespace TestQuest.DataAccess;
 
-public record CloseQuestionDto : BaseDto
+public record QuestionDto : BaseDto
 {
     private readonly string? _question;
-    // private readonly List<string> _options;
     private readonly string? _answer;
     
     public string Question

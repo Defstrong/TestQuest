@@ -1,16 +1,16 @@
 namespace TestQuest.DataAccess;
 
-public sealed record ResultTestDto : BaseDbEntity
+public sealed record ResultTestDto : BaseDto 
 {
-    private readonly string? _idUser;
+    private readonly string? _userId;
     private readonly byte? _correctAnswers;
     private readonly uint? _result;
     private readonly DateTime? _completedAt;
 
-    public string IdUser 
+    public string UserId 
     {
-        get => _idUser ?? string.Empty;
-        init => _idUser = value is { Length: > 0 }
+        get => _userId ?? string.Empty;
+        init => _userId = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
     public byte CorrectAnswers

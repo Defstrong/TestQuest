@@ -1,7 +1,7 @@
 namespace TestQuest.DataAccess;
 
 public interface IBaseService<T>
-    where T : BaseDbEntity
+    where T : BaseDto
 {
     Task<bool> CreateAsync(T model, CancellationToken token = default);
     Task<T> GetAsync(string id, CancellationToken token = default);

@@ -1,5 +1,5 @@
 namespace TestQuest.DataAccess;
 
-public interface IUserAuthorizeRepository : IBaseRepository<DbUserAuthorize>
+public interface IUserAuthorizeService : IBaseService<UserAuthorizeDto>
 {
 }
