@@ -19,5 +19,5 @@ public sealed record DbQuestion : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public List<string> Options { get; init; } = new();
+    public List<DbOption> Options { get; init; } = new();
 }

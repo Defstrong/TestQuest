@@ -32,9 +32,10 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
             .IsRequired();
 
         builder
-            .Property(q => q.Options)
-            .HasColumnName("options")
-            .HasColumnType("VARCHAR[]");
-
+            .HasMany(q => q.Options)
+            .WithOne(q => q.Question)
+            .HasConstraintName("options")
+            .HasForeignKey(q => q.Id)
+            .IsRequired();
     }
 }

@@ -61,15 +61,17 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .IsRequired();
 
         builder
-            .Property(t => t.Category)
-            .HasColumnName("category")
-            .IsRequired();
-
-        builder
             .Property(t => t.Status)
             .HasColumnName("status")
             .HasColumnType("VARCHAR")
             .HasMaxLength(20)
+            .IsRequired();
+        
+        builder
+            .HasMany(t => t.Category)
+            .WithOne(t => t.Test)
+            .HasConstraintName("category")
+            .HasForeignKey(t => t.Id)
             .IsRequired();
     }
 }

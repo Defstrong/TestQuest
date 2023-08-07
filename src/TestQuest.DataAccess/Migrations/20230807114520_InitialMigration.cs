@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -38,7 +37,6 @@ namespace TestQuest.DataAccess.Migrations
                     total_questions = table.Column<int>(type: "INT", nullable: false),
                     author_id = table.Column<string>(type: "VARCHAR", nullable: false),
                     created_at = table.Column<DateTime>(type: "DATE", nullable: false),
-                    category = table.Column<List<string>>(type: "text[]", nullable: false),
                     status = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -63,13 +61,43 @@ namespace TestQuest.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "users_authorize",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    email = table.Column<string>(type: "VARCHAR", maxLength: 75, nullable: false),
+                    password = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users_authorize", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "category",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    category = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_category", x => x.id);
+                    table.ForeignKey(
+                        name: "category",
+                        column: x => x.id,
+                        principalTable: "test",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "question",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     question = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     answer = table.Column<string>(type: "VARCHAR", maxLength: 100, nullable: false),
-                    options = table.Column<List<string>>(type: "VARCHAR[]", nullable: false),
                     DbTestId = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>
@@ -82,6 +110,24 @@ namespace TestQuest.DataAccess.Migrations
                         principalColumn: "id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "options",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    option = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_options", x => x.id);
+                    table.ForeignKey(
+                        name: "options",
+                        column: x => x.id,
+                        principalTable: "question",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_question_DbTestId",
                 table: "question",
@@ -92,13 +138,22 @@ namespace TestQuest.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "question");
+                name: "category");
+
+            migrationBuilder.DropTable(
+                name: "options");
 
             migrationBuilder.DropTable(
                 name: "result_test");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "users_authorize");
+
+            migrationBuilder.DropTable(
+                name: "question");
 
             migrationBuilder.DropTable(
                 name: "test");

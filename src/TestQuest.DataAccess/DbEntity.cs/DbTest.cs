@@ -37,7 +37,6 @@ public sealed record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-
     public string AuthorId
     {
         get => _authorId ?? string.Empty;
@@ -52,12 +51,12 @@ public sealed record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public List<string> Category { get; init; } = new();
-    public List<DbQuestion> Questions { get; init; } = new();
-
     public TestStatus Status
     {
         get => _status;
         init => _status = value;
     }
+
+    public List<DbCategory> Category { get; init; } = new();
+    public List<DbQuestion> Questions { get; init; } = new();
 }
