@@ -3,14 +3,11 @@ namespace TestQuest.DataAccess;
 public sealed record DbOption : BaseDbEntity
 {
     private readonly string? _option;
-    // private readonly string? _idQuestion;
 
-    // public string IdQuestion
-    // {
-    //     get => _idQuestion ?? string.Empty;
-    //     init => _idQuestion = value is { Length: > 0 }
-    //         ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    // }
+    public DbOption()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
 
     public string Option
     {
@@ -18,5 +15,7 @@ public sealed record DbOption : BaseDbEntity
         init => _option = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-    public DbQuestion Question { get; init; } = new();
+
+    public string QuestionId { get; set; }
+    public DbQuestion Question { get; set; } = new();
 }

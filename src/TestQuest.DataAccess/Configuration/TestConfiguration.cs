@@ -71,7 +71,7 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .HasMany(t => t.Category)
             .WithOne(t => t.Test)
             .HasConstraintName("category")
-            .HasForeignKey(t => t.Id)
+            .HasForeignKey(t => t.TestId)
             .IsRequired();
     }
 }

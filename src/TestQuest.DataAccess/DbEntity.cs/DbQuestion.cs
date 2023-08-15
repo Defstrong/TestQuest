@@ -5,6 +5,11 @@ public sealed record DbQuestion : BaseDbEntity
     private readonly string? _question;
     private readonly string? _answer;
 
+    public DbQuestion()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+
     public string Question
     {
         get => _question ?? string.Empty;

@@ -1,17 +1,23 @@
 using TestQuest.DataAccess;
+using AutoMapper;
 
 namespace TestQuest.BusinessLogic;
 
 public sealed class ResultTestService : IResultTestService
 {
     private readonly IResultTestRepository _resultTestRepository;
+    private readonly IMapper _mapper;
 
-    public ResultTestService(IResultTestRepository resultTestRepository)
-        => _resultTestRepository = resultTestRepository;
-
-    public async Task<bool> CreateAsync(ResultTestDto model, CancellationToken token = default)
+    public ResultTestService(IResultTestRepository resultTestRepository, IMapper mapper)
     {
-        DbResultTest dbResultTest = model.DtoToDbResultTest();
+        ArgumentNullException.ThrowIfNull(resultTestRepository);
+        _resultTestRepository = resultTestRepository;
+        _mapper = mapper;
+    }
+
+    public async Task<bool> CreateAsync(ResultTestDto entity, CancellationToken token = default)
+    {
+        DbResultTest dbResultTest = _mapper.Map<DbResultTest>(entity);
         bool createResult = await _resultTestRepository.CreateAsync(dbResultTest, token);
         return createResult;
     }
@@ -24,21 +30,21 @@ public sealed class ResultTestService : IResultTestService
 
     public async Task<ResultTestDto> GetAsync(string id, CancellationToken token = default)
     {
-        DbResultTest dbResultTest = await _resultTestRepository.GetAsync(id, token);
-        ResultTestDto resultTestDto = dbResultTest.DbResultTestToDto();
+        DbResultTest? dbResultTest = await _resultTestRepository.GetAsync(id, token);
+        ResultTestDto resultTestDto = _mapper.Map<ResultTestDto>(dbResultTest);
         return resultTestDto;
     }
 
     public async Task<IEnumerable<ResultTestDto>> GetAsync(CancellationToken token = default)
     {
         IEnumerable<DbResultTest> dbResultTests = await _resultTestRepository.GetAsync(token);
-        IEnumerable<ResultTestDto> resultTestDtos = dbResultTests.Select(rt => rt.DbResultTestToDto());
+        IEnumerable<ResultTestDto> resultTestDtos = _mapper.Map<IEnumerable<ResultTestDto>>(dbResultTests);
         return resultTestDtos;
     }
 
-    public async Task<bool> UpdateAsync(ResultTestDto model, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(ResultTestDto entity, CancellationToken token = default)
     {
-        DbResultTest dbResultTest = model.DtoToDbResultTest();
+        DbResultTest dbResultTest = _mapper.Map<DbResultTest>(entity);
         bool updateResult = await _resultTestRepository.UpdateAsync(dbResultTest, token);
         return updateResult;
     }

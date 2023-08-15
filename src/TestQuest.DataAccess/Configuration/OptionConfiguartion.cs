@@ -22,6 +22,5 @@ public sealed class OptionConfiguration : IEntityTypeConfiguration<DbOption>
             .HasColumnName("option")
             .HasColumnType("VARCHAR")
             .IsRequired();
-
     }
 }

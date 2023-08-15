@@ -1,5 +1,3 @@
 namespace TestQuest.DataAccess;
 
-public interface ITestRepository : IBaseRepository<DbTest>
-{
-}
+public interface ITestRepository : IBaseRepository<DbTest> { }

@@ -33,7 +33,13 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("category");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TestId");
 
                     b.ToTable("category", (string)null);
                 });
@@ -49,7 +55,13 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("option");
 
+                    b.Property<string>("QuestionId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("options", (string)null);
                 });
@@ -118,6 +130,9 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("id");
 
+                    b.Property<byte>("AgeLimit")
+                        .HasColumnType("smallint");
+
                     b.Property<string>("AuthorId")
                         .IsRequired()
                         .HasColumnType("VARCHAR")
@@ -126,6 +141,10 @@ namespace TestQuest.DataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DATE")
                         .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Difficulty")
                         .IsRequired()
@@ -174,6 +193,12 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("INT")
                         .HasColumnName("age");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("email");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -186,43 +211,32 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("name");
 
-                    b.Property<int>("RatingPoints")
-                        .HasColumnType("INT")
-                        .HasColumnName("rating_points");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("TestQuest.DataAccess.DbUserAuthorize", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("email");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("VARCHAR")
                         .HasColumnName("password");
 
+                    b.Property<int>("RatingPoints")
+                        .HasColumnType("INT")
+                        .HasColumnName("rating_points");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("role");
+
                     b.HasKey("Id");
 
-                    b.ToTable("users_authorize", (string)null);
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbCategory", b =>
                 {
                     b.HasOne("TestQuest.DataAccess.DbTest", "Test")
                         .WithMany("Category")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("category");
@@ -234,7 +248,7 @@ namespace TestQuest.DataAccess.Migrations
                 {
                     b.HasOne("TestQuest.DataAccess.DbQuestion", "Question")
                         .WithMany("Options")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("options");

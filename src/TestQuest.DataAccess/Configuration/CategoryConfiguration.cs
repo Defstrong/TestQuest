@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TestQuest.DataAccess;
 
-public sealed class CateGoryConfiguration : IEntityTypeConfiguration<DbCategory>
+public sealed class CategoryConfiguration : IEntityTypeConfiguration<DbCategory>
 {
     public void Configure(EntityTypeBuilder<DbCategory> builder)
     {
@@ -22,6 +22,5 @@ public sealed class CateGoryConfiguration : IEntityTypeConfiguration<DbCategory>
             .HasColumnName("category")
             .HasColumnType("VARCHAR")
             .IsRequired();
-
     }
 }

@@ -8,7 +8,6 @@ public sealed class TestQuestDbContext : DbContext
     public DbSet<DbResultTest> ResultTests => Set<DbResultTest>();
     public DbSet<DbTest> Tests => Set<DbTest>();
     public DbSet<DbUser> Users => Set<DbUser>();
-    public DbSet<DbUserAuthorize> UsersAuthorizes => Set<DbUserAuthorize>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
