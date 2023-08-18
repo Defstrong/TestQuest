@@ -3,9 +3,10 @@ namespace TestQuest.DataAccess;
 public abstract record BaseDto
 {
     private readonly string? _id;
-    public BaseDto()
+    public string Id
     {
-        Id = Guid.NewGuid().ToString();
+        get => _id ?? string.Empty;
+        init => _id = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-    public string Id { get; init; }
 }

@@ -1,13 +1,16 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbTest : BaseDbEntity
+public record UserTestDto : BaseDbEntity
 {
     private readonly string? _name;
     private readonly Difficulty _difficulty;
     private readonly byte? _timeLimit;
     private readonly byte? _totalQuestions;
+    private readonly byte? _correctAnswers;
+    private readonly string? _result;
     private readonly string? _authorId;
-    private readonly DateTime? _createdAt;
+    private readonly DateTime? _creationDate;
+    // private readonly List<string>? _category;
     private readonly TestStatus _status;
 
     public string Name
@@ -37,6 +40,19 @@ public sealed record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
+    public byte CorrectAnswers
+    {
+        get => _correctAnswers ?? 0;
+        init => _correctAnswers = value > 0
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
+
+    public string Result
+    {
+        get => _result ?? string.Empty;
+        init => _result = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
 
     public string AuthorId
     {
@@ -45,15 +61,14 @@ public sealed record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CreatedAt
+    public DateTime CreationDate
     {
-        get => _createdAt ?? new DateTime();
-        init => _createdAt = value >= DateTime.Now
+        get => _creationDate ?? new DateTime();
+        init => _creationDate = value >= DateTime.Now
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
     public List<string> Category { get; init; } = new();
-    public List<DbQuestion> Questions { get; init; } = new();
 
     public TestStatus Status    
     {

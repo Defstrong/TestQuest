@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\TestQuest.Presentation.props" />
-</Project>

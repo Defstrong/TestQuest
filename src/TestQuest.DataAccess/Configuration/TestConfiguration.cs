@@ -10,7 +10,7 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .ToTable("test")
             .HasKey(t => t.Id);
 
-        builder
+        builder        
             .Property(t => t.Id)
             .HasColumnName("id")
             .HasColumnType("VARCHAR")
@@ -61,17 +61,15 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .IsRequired();
 
         builder
+            .Property(t => t.Category)
+            .HasColumnName("category")
+            .IsRequired();
+
+        builder
             .Property(t => t.Status)
             .HasColumnName("status")
             .HasColumnType("VARCHAR")
             .HasMaxLength(20)
-            .IsRequired();
-        
-        builder
-            .HasMany(t => t.Category)
-            .WithOne(t => t.Test)
-            .HasConstraintName("category")
-            .HasForeignKey(t => t.TestId)
             .IsRequired();
     }
 }

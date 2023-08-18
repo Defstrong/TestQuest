@@ -3,24 +3,8 @@ namespace TestQuest.DataAccess;
 public record UserDto : BaseDto
 {
     private readonly string? _name;
+    private readonly Gender _gender;
     private readonly byte? _age;
-    private readonly int? _ratingPoints;
-    private readonly string? _email;
-    private readonly string? _password;
-
-    public string Email
-    {
-        get => _email ?? string.Empty;
-        init => _email = value is { Length: > 0 }
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
-
-    public string Password
-    {
-        get => _password ?? string.Empty;
-        init => _password = value is { Length: > 0 }
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
 
     public string Name
     {
@@ -29,7 +13,11 @@ public record UserDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public Gender Gender { get; init; }
+    public Gender Gender
+    {
+        get => _gender;
+        init => _gender = value;
+    }
 
     public byte Age
     {
@@ -37,10 +25,4 @@ public record UserDto : BaseDto
         init => _age = value > 0
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-
-    public int RatingPoints { get; set; }
-
-    public List<Achievement> Achievements { get; init; } = new();
-
-    public Role Role { get; init; }
 }

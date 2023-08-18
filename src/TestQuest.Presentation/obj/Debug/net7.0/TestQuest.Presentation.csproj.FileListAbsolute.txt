@@ -46,8 +46,3 @@ C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Sw
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Swashbuckle.Core.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\WebActivatorEx.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net7.0\TestQuest.Presentation.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Npgsql.dll
-C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
