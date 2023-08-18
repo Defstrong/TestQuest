@@ -1,11 +1,10 @@
 namespace TestQuest.DataAccess;
 
-public record CloseQuestionDto : BaseDto
+public record QuestionDto : BaseDto
 {
     private readonly string? _question;
-    // private readonly List<string> _options;
     private readonly string? _answer;
-    
+
     public string Question
     {
         get => _question ?? string.Empty;
@@ -13,12 +12,12 @@ public record CloseQuestionDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public string Answer 
+    public string Answer
     {
         get => _answer ?? string.Empty;
         init => _answer = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public List<string> Options { get; init; } = new();
+    public List<OptionDto> Options { get; set; }
 }

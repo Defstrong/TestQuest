@@ -9,7 +9,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
         builder
             .ToTable("users")
             .HasKey(u => u.Id);
-        
+
         builder
             .Property(u => u.Id)
             .HasColumnName("id")
@@ -31,6 +31,13 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
             .IsRequired();
         
         builder
+            .Property(u => u.Role)
+            .HasColumnName("role")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(15)
+            .IsRequired();
+
+        builder
             .Property(u => u.Age)
             .HasColumnName("age")
             .HasColumnType("INT")
@@ -46,5 +53,19 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
             .Property(u => u.Achievements)
             .HasColumnName("achievements")
             .HasColumnType("VARCHAR[]");
+        
+        builder
+            .Property(u => u.Email)
+            .HasColumnName("email")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder
+            .Property(u => u.Password)
+            .HasColumnName("password")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(200)
+            .IsRequired();
     }
 }

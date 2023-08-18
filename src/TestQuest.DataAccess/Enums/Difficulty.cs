@@ -2,10 +2,10 @@ namespace TestQuest.DataAccess;
 
 public enum Difficulty : int
 {
-    VeryLow = 0,
-    Low = 1,
+    VeryEasy = 0,
+    Easy = 1,
     Medium = 2,
-    Hight = 3,
-    VeryHight = 4,
-    Impissible = 5 
+    Hard = 3,
+    VeryHard = 4,
+    Impissible = 5
 }

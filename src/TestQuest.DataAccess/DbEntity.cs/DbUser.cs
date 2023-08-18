@@ -3,9 +3,23 @@ namespace TestQuest.DataAccess;
 public sealed record DbUser : BaseDbEntity
 {
     private readonly string? _name;
-    private readonly Gender _gender;
     private readonly byte? _age;
-    private readonly int? _ratingPoints;
+    private readonly string? _email;
+    private readonly string? _password;
+
+    public string Email
+    {
+        get => _email ?? string.Empty;
+        init => _email = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
+
+    public string Password
+    {
+        get => _password ?? string.Empty;
+        init => _password = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
 
     public string Name
     {
@@ -14,11 +28,7 @@ public sealed record DbUser : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public Gender Gender
-    {
-        get => _gender;
-        init => _gender = value;
-    }
+    public Gender Gender { get; init; }
 
     public byte Age
     {
@@ -27,12 +37,10 @@ public sealed record DbUser : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public int RatingPoints
-    {
-        get => _ratingPoints ?? 0;
-        init => _ratingPoints = value > 0
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public int RatingPoints { get; set; }
 
     public List<Achievement> Achievements { get; init; } = new();
+
+    public Role Role { get; init; }
+
 }

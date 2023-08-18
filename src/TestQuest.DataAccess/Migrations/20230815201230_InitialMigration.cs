@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -34,12 +33,13 @@ namespace TestQuest.DataAccess.Migrations
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 50, nullable: false),
                     difficulty = table.Column<string>(type: "VARCHAR", maxLength: 30, nullable: false),
+                    status = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false),
                     time_limit = table.Column<int>(type: "INT", nullable: false),
                     total_questions = table.Column<int>(type: "INT", nullable: false),
                     author_id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    AgeLimit = table.Column<byte>(type: "smallint", nullable: false),
                     created_at = table.Column<DateTime>(type: "DATE", nullable: false),
-                    category = table.Column<List<string>>(type: "text[]", nullable: false),
-                    status = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,15 +51,37 @@ namespace TestQuest.DataAccess.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    email = table.Column<string>(type: "VARCHAR", maxLength: 100, nullable: false),
+                    password = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false),
                     gender = table.Column<string>(type: "VARCHAR", maxLength: 10, nullable: false),
                     age = table.Column<int>(type: "INT", maxLength: 150, nullable: false),
                     rating_points = table.Column<int>(type: "INT", nullable: false),
-                    achievements = table.Column<string[]>(type: "VARCHAR[]", nullable: false)
+                    achievements = table.Column<string[]>(type: "VARCHAR[]", nullable: false),
+                    role = table.Column<string>(type: "VARCHAR", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "category",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    category = table.Column<string>(type: "VARCHAR", nullable: false),
+                    TestId = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_category", x => x.id);
+                    table.ForeignKey(
+                        name: "category",
+                        column: x => x.TestId,
+                        principalTable: "test",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,7 +91,6 @@ namespace TestQuest.DataAccess.Migrations
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     question = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     answer = table.Column<string>(type: "VARCHAR", maxLength: 100, nullable: false),
-                    options = table.Column<List<string>>(type: "VARCHAR[]", nullable: false),
                     DbTestId = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>
@@ -82,6 +103,35 @@ namespace TestQuest.DataAccess.Migrations
                         principalColumn: "id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "options",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    option = table.Column<string>(type: "VARCHAR", nullable: false),
+                    QuestionId = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_options", x => x.id);
+                    table.ForeignKey(
+                        name: "options",
+                        column: x => x.QuestionId,
+                        principalTable: "question",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_category_TestId",
+                table: "category",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_options_QuestionId",
+                table: "options",
+                column: "QuestionId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_question_DbTestId",
                 table: "question",
@@ -92,13 +142,19 @@ namespace TestQuest.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "question");
+                name: "category");
+
+            migrationBuilder.DropTable(
+                name: "options");
 
             migrationBuilder.DropTable(
                 name: "result_test");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "question");
 
             migrationBuilder.DropTable(
                 name: "test");
