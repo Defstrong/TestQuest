@@ -1,0 +1,145 @@
+@using TestQuest.DataAccess;
+@model TestDto;
+@{
+    ViewData["Title"] = "Passing test " + Model.Name;
+    List<QuestionOption> questionOptions = new List<QuestionOption>();
+    
+    foreach(var ii in Model.Questions)
+    {
+        QuestionOption questionOption = new QuestionOption { 
+            Question = ii.Question, Options = ii.Options.Select(o => o.Option).ToList(), Answer = ii.Answer};
+
+        questionOptions.Add(questionOption);
+    }
+
+    List<string> str = new List<string>();
+}
+
+@section Scripts
+{
+<script>
+    var questions = @Html.Raw(Json.Serialize(@questionOptions));
+
+    var testContainer = document.getElementById("test-container");
+
+    questions.forEach(function (questionData, index) {
+        var questionElement = document.createElement("div");
+        questionElement.classList.add("question");
+
+        var questionTitle = document.createElement("h3");
+        questionTitle.textContent = questionData.question;
+
+        var optionsContainer = document.createElement("div");
+        optionsContainer.classList.add("options");
+
+        questionData.options.forEach(function (option, optionIndex) {
+            var optionElement = document.createElement("div");
+            optionElement.classList.add("option");
+
+            var input = document.createElement("input");
+            input.type = "radio";
+            input.name = "answers[" + index + "]";
+            input.value = option;
+            input.required = true;
+
+            var label = document.createElement("label");
+            label.textContent = option;
+
+            optionElement.appendChild(input);
+            optionElement.appendChild(label);
+            optionsContainer.appendChild(optionElement);
+        });
+
+        questionElement.appendChild(questionTitle);
+        questionElement.appendChild(optionsContainer);
+        testContainer.appendChild(questionElement);
+    });
+
+</script>
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; 
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: black;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .header-description {
+            font-size: 16px;
+            font-weight: 400;
+            color: white;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .question-options {
+            list-style: none;
+            padding-left: 0;
+            color: white;
+        }
+
+        .question-option {
+            margin-bottom: 10px;
+        }
+
+        .question-option input {
+            margin-right: 10px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 200px;
+            height: 40px;
+            margin: 0 auto;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+          <h1 class="header-title">@Model.Name</h1>
+          <p class="header-description">@Model.Description</p>
+        </div>
+        
+        <form class="survey-form" asp-action="Result" asp-route-id="@Model.Id" method="POST">
+          <div id="test-container"></div>
+          <button type ="submit" class ="submit-button">Завершить тест</button> 
+        </form> 
+    </div> 
+</body> 
+</html> 

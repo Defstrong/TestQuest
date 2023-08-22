@@ -23,24 +23,26 @@ public class LoginController : Controller
     [HttpPost("/registration")]
     public Task<bool> Registration(UserDto user, CancellationToken token = default)
     {
-        HttpContext.Response.Cookies.Append("email", user.Email);
-        HttpContext.Response.Cookies.Append("password", user.Password);
         return _userService.CreateAsync(user, token);
     }
 
     [HttpGet]
-    public IActionResult SignIn() => View();
+    public IActionResult SignIn() => RedirectToAction("Registration", "Login");
 
     [HttpPost]
     public async Task<IActionResult> SignIn(SingInData singInData)
     {
         ArgumentNullException.ThrowIfNull(singInData);
-        var userDefinition = await _userService.UserDefinition(singInData);
+        var userDefinition = await _userService.GetAsync(singInData);
+        Console.WriteLine(userDefinition);
 
         if(userDefinition is not null)
         {
             var claims = new List<Claim> { 
-                new (ClaimsIdentity.DefaultNameClaimType, userDefinition.Email)};
+                new (ClaimsIdentity.DefaultNameClaimType, userDefinition.Email),
+                new ("Id", userDefinition.Id),
+                new ("Role", userDefinition.Role.ToString()),
+                new ("UserName", userDefinition.Name)};
 
             var id = new ClaimsIdentity(claims,
                 "ApplicationCookie",
@@ -53,7 +55,7 @@ public class LoginController : Controller
 
             return RedirectToAction("Index", "Home");
         }
-        return View();
+        return RedirectToAction("Registration", "Login");
     }
 
     [HttpGet("/signout")]

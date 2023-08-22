@@ -35,7 +35,6 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
             .HasMany(q => q.Options)
             .WithOne(q => q.Question)
             .HasConstraintName("options")
-            .HasForeignKey(q => q.QuestionId)
-            .IsRequired();
+            .HasForeignKey(q => q.QuestionId);
     }
 }

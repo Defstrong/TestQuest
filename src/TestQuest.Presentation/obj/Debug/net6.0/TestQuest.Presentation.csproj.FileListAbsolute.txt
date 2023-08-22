@@ -62,3 +62,13 @@ C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net6.0\Te
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\obj\Debug\net6.0\ref\TestQuest.Presentation.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

@@ -5,12 +5,28 @@
       "PackagePath": "staticwebassets\\TestQuest.Presentation.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\menu.css",
+      "PackagePath": "staticwebassets\\css\\menu.css"
+    },
+    {
       "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
       "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\index.js",
+      "PackagePath": "staticwebassets\\js\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\menu.js",
+      "PackagePath": "staticwebassets\\js\\menu.js"
     },
     {
       "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\site.js",

@@ -1,61 +1,65 @@
-@model TestQuest.DataAccess.TestDto;
+@using TestQuest.DataAccess
+@model TestDto;
 
 @{
     ViewData["Title"] = "Create Test";
 }
-
 @section Scripts
 {
     <script>
-        let questionCount = 1;
-        let questionOption = 1;
-        let questionCategory = 1;
-        const addQuestionButton = document.getElementById("addQuestionButton");
-        const questionContainer = document.getElementById("questionContainer");
-        const addOptionButton = document.getElementById("addOptionButton");
-        const optionContainer = document.getElementById("optionContainer");
-
+        let testCount = 0;
+        let testOption = 0;
+        let testCategory = 1;
+        const addtestButton = document.getElementById("addtestButton");
+        const testContainer = document.getElementById("testContainer");
         const addCategoryButton = document.getElementById("addCategoryButton");
         const categoryContainer = document.getElementById("categoryContainer")
 
-        addQuestionButton.addEventListener("click", function () {
-            questionCount++;
+        addtestButton.addEventListener("click", function () {
+            testCount++;
+            testOption = 1; // reset the option count for each new test
 
-            const questionHtml = `
-                <div id="question${questionCount}" class="question">
-                    <h2>Question ${questionCount}</h2>
-                    <label for="question${questionCount}-text">Question Text:</label>
-                    <input id="question${questionCount}-text" type="text" name="Questions[${questionCount - 1}].Question" required />
+            const testHtml = `
+                <div id="test${testCount}" class="test">
+                    <h2>Question ${testCount}</h2>
+                    <label for="test${testCount}-text">Question text:</label>
+                    <input id="test${testCount}-text" type="text" name="Questions[${testCount - 1}].Question" required />
 
-                    <label for="question${questionCount}-answer">Answer:</label>
-                    <input id="question${questionCount}-answer" type="text" name="Questions[${questionCount - 1}].Answer" required />
+                    <label for="test${testCount}-answer">Answer:</label>
+                    <input id="test${testCount}-answer" type="text" name="Questions[${testCount - 1}].Answer" required />
 
-                <div id="optionContainer">
-                    <label for="question${questionCount}-option">Option 1</label>
-                    <input id="question${questionCount}-option" type="text" name="Questions[${questionCount - 1}].Options[0].Option"/>
+                <div class="optionContainer"> <!-- use class instead of id -->
+                    <label for="test${testCount}-option${testOption}">Option ${testOption}</label>
+                    <input id="test${testCount}-option${testOption}" type="text" name="Questions[${testCount - 1}].Options[0].Option"/>
                 </div>
-                    <button type="button" id="addOptionButton">Add option</button>
+                    <button type="button" class="addOptionButton">Add option</button> <!-- use class instead of id -->
                 </div>
             `;
 
-            questionContainer.insertAdjacentHTML("beforeend", questionHtml);
+            testContainer.insertAdjacentHTML("beforeend", testHtml);
 
         });
 
-        addOptionButton.addEventListener("click", function(){
-            questionOption++;
-            const optionHtml = `
-                <label for="question${questionCount}-option">Option ${questionOption}</label>
-                <input id="question${questionCount}-option" type="text" name="Questions[${questionCount - 1}].Options[${questionOption - 1}].Option"/>
-            `
-            optionContainer.insertAdjacentHTML("beforeend", optionHtml);
+        testContainer.addEventListener("click", function(event){
+            if (event.target.classList.contains("addOptionButton")) {
+                let testElement = event.target.parentElement;
+                let testNumber = testElement.id.replace("test", "");
+                let optionContainer = testElement.querySelector(".optionContainer");
+                testOption++;
+
+                const optionHtml = `
+                    <label for="test${testNumber}-option${testOption}">Option ${testOption}</label>
+                    <input id="test${testNumber}-option${testOption}" type="text" name="Questions[${testNumber - 1}].Options[${testOption - 1}].Option"/>
+                `
+                optionContainer.insertAdjacentHTML("beforeend", optionHtml);
+            }
         });
 
         addCategoryButton.addEventListener("click", function(){
-            questionCategory++;
+            testCategory++;
             const categoryHtml= `
-                <label for="category${questionCategory}-text">Category ${questionCategory}</label>
-                <input id="category${questionCategory}-text" type="text" name="Category[${questionCategory-1}].Category" required />
+                <label for="category${testCategory}-text">Category ${testCategory}</label>
+                <input id="category${testCategory}-text" type="text" name="Category[${testCategory-1}].Category" required />
             `
             categoryContainer.insertAdjacentHTML("beforeend", categoryHtml);
         });
@@ -93,24 +97,10 @@
 
     <label><h2>Questions</h2></label>
     
-    <div id="questionContainer">
-        <div id="question0" class="question">
-            <h2>Question 1</h2>
-            <label for="question0-text">Question Text:</label>
-            <input id="question0-text" type="text" name="Questions[0].Question" required />
-
-            <label for="question0-answer">Answer:</label>
-            <input id="question0-answer" type="text" name="Questions[0].Answer" required />
-
-            <div id="optionContainer">
-                <label for="question0-option">Option 1</label>
-                <input id="question0-option" type="text" name="Questions[0].Options[0].Option"/>
-            </div>
-            <button type="button" id="addOptionButton">Add option</button>
-        </div>
+    <div id="testContainer">
     </div>
 
-    <button type="button" id="addQuestionButton">Add Another Question</button>
+    <button type="button" id="addtestButton">Add Another question</button>
 
     <div>
         <label for="description">Description:</label>
@@ -127,16 +117,15 @@
 </form>
 
 <style>
-.question {
+.test {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 20px;
   margin-left: 60px; /* Смещение на 60px вправо */
 }
 
-.question h2 {
+.test h2 {
   margin: 0;
-  font-size: 18px;
   margin-left: 60px;
 }
 .categoryContainer {
@@ -200,6 +189,7 @@ button[type="submit"]:active {
 }
 
 </style>
+
 @* @model TestQuest.DataAccess.TestDto;
 
 @{
@@ -209,16 +199,16 @@ button[type="submit"]:active {
 @section Scripts
 {
     <script>
-        let question = 0;
+        let test = 0;
 
-        const divId = document.getElementById(`question${question}`);
+        const divId = document.getElementById(`test${test}`);
         const but = document.getElementById("firstbutton");
 
         but.onclick = function() {
-            question++;
+            test++;
 
-            const addQuestion = `
-                <div id="question${question}">
+            const addtest = `
+                <div id="test${test}">
                     <form method="post">
                         <label for="name">Name</label>
                         <input type="text" name="name"/> 
@@ -226,8 +216,8 @@ button[type="submit"]:active {
                         <label for="timelimit">Time limit</label>
                         <input type="text" name="timelimit"/> 
 
-                        <label for="totalquestions">Total question</label>
-                        <input type="text" name="totalquestions"/> 
+                        <label for="totaltests">Total test</label>
+                        <input type="text" name="totaltests"/> 
 
                         <label for="authorid">Author id</label>
                         <input type="text" name="authorid"/> 
@@ -241,13 +231,13 @@ button[type="submit"]:active {
                     </form>
                 </div>
             `;
-        divId.insertAdjacentHTML('beforeend', addQuestion);
+        divId.insertAdjacentHTML('beforeend', addtest);
         }
 
     </script>
 }
 
-<div id="question0">
+<div id="test0">
     <form method="post">
         
         <label for="name">Name</label>
@@ -256,8 +246,8 @@ button[type="submit"]:active {
         <label for="timelimit">Time limit</label>
         <input type="text" name="timelimit"/> 
 
-        <label for="totalquestions">Total question</label>
-        <input type="text" name="totalquestions"/> 
+        <label for="totaltests">Total test</label>
+        <input type="text" name="totaltests"/> 
 
         <label for="authorid">Author id</label>
         <input type="text" name="authorid"/> 

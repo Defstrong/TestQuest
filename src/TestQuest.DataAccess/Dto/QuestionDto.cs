@@ -19,5 +19,5 @@ public record QuestionDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public List<OptionDto> Options { get; set; }
+    public List<OptionDto> Options { get; set; } = new();
 }

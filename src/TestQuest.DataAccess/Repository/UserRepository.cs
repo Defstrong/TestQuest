@@ -8,10 +8,11 @@ public sealed class UserRepository : BaseRepository<DbUser>, IUserRepository
     public UserRepository(TestQuestDbContext db) : base(db) 
         => _db = db;
     
-    public async Task<DbUser?> UserDefinition(string email, string password, CancellationToken token = default)
+    public Task<DbUser?> GetAsync(string email, string password, CancellationToken token = default)
     {
-        var userDefinition = await _db.Users
+        var userDefinition = _db.Users
             .FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Password.Equals(password));
+        
         return userDefinition; 
     }
 }

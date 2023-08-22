@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Passing test";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'testInfo')">Test Info</button>
+        <button class="tablinks" onclick="openTab(event, 'questions')">Questions</button>
+    </div>
+
+    <div id="testInfo" class="tabcontent">
+        <h3>Test Info</h3>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status">
+
+            <label for="timeLimit">Time Limit:</label>
+            <input type="number" id="timeLimit" name="timeLimit">
+
+            <label for="totalQuestions">Total Questions:</label>
+            <input type="number" id="totalQuestions" name="totalQuestions">
+
+            <label for="authorId">Author ID:</label>
+            <input type="text" id="authorId" name="authorId">
+
+            <label for="ageLimit">Age Limit:</label>
+            <input type="number" id="ageLimit" name="ageLimit">
+
+            <label for="createdAt">Created At:</label>
+            <input type="text" id="createdAt" name="createdAt">
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </form>
+    </div>
+
+    <div id="questions" class="tabcontent">
+        <h3>Questions</h3>
+        <!-- Add code here to display and manage questions -->
+    </div>
+
+</body>
+</html>

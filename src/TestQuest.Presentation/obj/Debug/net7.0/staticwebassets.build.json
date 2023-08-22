@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qJMVBUsue0YoE54oV9Q7eSYGtwq+WGYSgKcWiii6dmA=",
+  "Hash": "DJ//UZ5DX0nZccugVyJQ1p0Du4cqQHWLWI1WbaIgFV8=",
   "Source": "TestQuest.Presentation",
   "BasePath": "_content/TestQuest.Presentation",
   "Mode": "Default",
@@ -51,6 +51,23 @@
       "OriginalItemSpec": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\TestQuest.Presentation.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\menu.css",
+      "SourceId": "TestQuest.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\",
+      "BasePath": "_content/TestQuest.Presentation",
+      "RelativePath": "css/menu.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\menu.css"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\site.css",
       "SourceId": "TestQuest.Presentation",
       "SourceType": "Discovered",
@@ -68,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\style.css",
+      "SourceId": "TestQuest.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\",
+      "BasePath": "_content/TestQuest.Presentation",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\favicon.ico",
       "SourceId": "TestQuest.Presentation",
       "SourceType": "Discovered",
@@ -83,6 +117,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\index.js",
+      "SourceId": "TestQuest.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\",
+      "BasePath": "_content/TestQuest.Presentation",
+      "RelativePath": "js/index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\index.js"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\menu.js",
+      "SourceId": "TestQuest.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\",
+      "BasePath": "_content/TestQuest.Presentation",
+      "RelativePath": "js/menu.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\menu.js"
     },
     {
       "Identity": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\js\\site.js",

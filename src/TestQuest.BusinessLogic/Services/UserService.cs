@@ -10,6 +10,8 @@ public sealed class UserService : IUserService
 
     public UserService(IUserRepository userRepository, IMapper mapper)
     {
+        ArgumentNullException.ThrowIfNull(userRepository);
+        ArgumentNullException.ThrowIfNull(mapper);
         _mapper = mapper;
         _userRepository = userRepository;
     }
@@ -37,13 +39,14 @@ public sealed class UserService : IUserService
     public async Task<IEnumerable<UserDto>> GetAsync(CancellationToken token = default)
     {
         IEnumerable<DbUser> dbUsers = await _userRepository.GetAsync(token);
-        IEnumerable<UserDto> userDtos = _mapper.Map<IEnumerable<UserDto>>(dbUsers);
-        return userDtos;
+        IEnumerable<UserDto> usersDtos = _mapper.Map<IEnumerable<UserDto>>(dbUsers);
+
+        return usersDtos;
     }
 
-    public async Task<UserDto?> UserDefinition(SingInData singInData, CancellationToken token = default)
+    public async Task<UserDto?> GetAsync(SingInData singInData, CancellationToken token = default)
     {
-        DbUser? getResult = await _userRepository.UserDefinition(singInData.Email, singInData.Password);
+        DbUser? getResult = await _userRepository.GetAsync(singInData.Email, singInData.Password, token);
         UserDto userDto = _mapper.Map<UserDto>(getResult);
         return userDto;
     }

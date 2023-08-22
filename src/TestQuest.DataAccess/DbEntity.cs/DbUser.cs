@@ -1,6 +1,6 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbUser : BaseDbEntity
+public record DbUser : BaseDbEntity
 {
     private readonly string? _name;
     private readonly byte? _age;

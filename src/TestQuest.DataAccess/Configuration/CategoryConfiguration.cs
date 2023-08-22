@@ -18,6 +18,12 @@ public sealed class CategoryConfiguration : IEntityTypeConfiguration<DbCategory>
             .IsRequired();
 
         builder
+            .Property(q => q.TestId)
+            .HasColumnName("test_id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
             .Property(q => q.Category)
             .HasColumnName("category")
             .HasColumnType("VARCHAR")

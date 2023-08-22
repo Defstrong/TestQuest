@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TestQuest.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class ChangeFiledResultTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,6 +63,26 @@ namespace TestQuest.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "question_answer",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    question_text = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
+                    answer = table.Column<string>(type: "VARCHAR", nullable: false),
+                    status = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_question_answer", x => x.id);
+                    table.ForeignKey(
+                        name: "questions_answers",
+                        column: x => x.id,
+                        principalTable: "result_test",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,13 +168,16 @@ namespace TestQuest.DataAccess.Migrations
                 name: "options");
 
             migrationBuilder.DropTable(
-                name: "result_test");
+                name: "question_answer");
 
             migrationBuilder.DropTable(
                 name: "users");
 
             migrationBuilder.DropTable(
                 name: "question");
+
+            migrationBuilder.DropTable(
+                name: "result_test");
 
             migrationBuilder.DropTable(
                 name: "test");

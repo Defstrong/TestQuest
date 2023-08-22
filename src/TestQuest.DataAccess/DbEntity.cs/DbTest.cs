@@ -1,12 +1,10 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbTest : BaseDbEntity
+public record DbTest : BaseDbEntity
 {
     private readonly string? _name;
     private readonly byte? _timeLimit;
-    private readonly string? _authorId;
     private readonly byte? _ageLimit;
-    private readonly DateTime? _createdAt;
     private readonly string? _description;
 
     public string Name
@@ -28,7 +26,7 @@ public sealed record DbTest : BaseDbEntity
 
     public byte TotalQuestions { get; set; }
 
-    public string AuthorId { get; set; }
+    public string? AuthorId { get; set; }
 
     public byte AgeLimit 
     {
@@ -37,14 +35,11 @@ public sealed record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CreatedAt
-    {
-        get => _createdAt ?? new DateTime();
-        init => _createdAt = DateTime.Now;
-    }
+    public DateTime CreatedAt { get; init; } = DateTime.Now;
 
-    public List<DbCategory> Category { get; init; } = new();
-    public List<DbQuestion> Questions { get; init; } = new();
+    public virtual List<DbCategory> Category { get; init; } = new();
+    public virtual List<DbQuestion> Questions { get; init; } = new();
+    public virtual List<DbCommentAndTestScore> CommentAndTestScores { get; init; } = new();
 
     public string Description
     {

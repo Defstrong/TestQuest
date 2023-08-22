@@ -92,8 +92,8 @@ public class MapperConfiguration : Profile
                 dest.CorrectAnswers,
                 opt => opt.MapFrom(src => src.CorrectAnswers))
             .ForMember(dest =>
-                dest.Result,
-                opt => opt.MapFrom(src => src.Result))
+                dest.ResultPoints,
+                opt => opt.MapFrom(src => src.ResultPoints))
             .ForMember(dest =>
                 dest.CompletedAt,
                 opt => opt.MapFrom(src => src.CompletedAt)).ReverseMap();
@@ -127,5 +127,21 @@ public class MapperConfiguration : Profile
             .ForMember(dest =>
                 dest.Role,
                 opt => opt.MapFrom(src => src.Role)).ReverseMap();
+            
+
+
+        CreateMap<DbQuestionAnswer, QuestionAnswerDto>()
+            .ForMember(dest =>
+                dest.Id,
+                opt => opt.MapFrom(src => src.Id)).ReverseMap()
+            .ForMember(dest =>
+                dest.Answer,
+                opt => opt.MapFrom(src => src.Answer))
+            .ForMember(dest =>
+                dest.QuestionText,
+                opt => opt.MapFrom(src => src.QuestionText))
+            .ForMember(dest =>
+                dest.Status,
+                opt => opt.MapFrom(src => src.Status)).ReverseMap();
     }
 }

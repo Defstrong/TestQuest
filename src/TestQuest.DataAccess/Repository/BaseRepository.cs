@@ -9,9 +9,9 @@ public class BaseRepository<T> : IBaseRepository<T>
 
     public BaseRepository(TestQuestDbContext db) => _db = db;
 
-    public async Task<bool> CreateAsync(T model, CancellationToken token = default)
+    public async Task<bool> CreateAsync(T entity, CancellationToken token = default)
     {
-        await _db.Set<T>().AddAsync(model, token);
+        await _db.Set<T>().AddAsync(entity, token);
         int createResult = await _db.SaveChangesAsync(token);
         return createResult > 0;
     }
@@ -19,6 +19,10 @@ public class BaseRepository<T> : IBaseRepository<T>
     public async Task<bool> DeleteAsync(string id, CancellationToken token = default)
     {
         var entity = await _db.Set<T>().FindAsync(id);
+
+        if(entity is null)
+            return false;
+
         _db.Set<T>().Remove(entity);
         int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
@@ -36,9 +40,10 @@ public class BaseRepository<T> : IBaseRepository<T>
         return entities;
     }
 
-    public async Task<bool> UpdateAsync(T model, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(T entity, CancellationToken token = default)
     {
-        _db.Entry(model).State = EntityState.Modified;
+        await DeleteAsync(entity.Id, token);
+        await CreateAsync(entity, token);
         int updateResult = await _db.SaveChangesAsync(token);
         return updateResult > 0;
     }

@@ -5,7 +5,19 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-        Console.WriteLine(User.Identity.IsAuthenticated);
+        if(!User.Identity.IsAuthenticated)
+            return RedirectToAction("Registration", "Login");
+        
         return View();
     }
+
+    [HttpGet]
+    public IActionResult PersonalArea()
+    {
+        if(!User.Identity.IsAuthenticated)
+            return RedirectToAction("Registration", "Login");
+        
+        return View();
+    }
+
 }

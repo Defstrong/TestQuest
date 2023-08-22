@@ -1,11 +1,10 @@
 namespace TestQuest.DataAccess;
 
-public sealed record ResultTestDto : BaseDto
+public record ResultTestDto : BaseDto
 {
     private readonly string? _userId;
     private readonly byte? _correctAnswers;
-    private readonly uint? _result;
-    private readonly DateTime? _completedAt;
+    private readonly int? _resultPoints;
 
     public string UserId
     {
@@ -16,21 +15,18 @@ public sealed record ResultTestDto : BaseDto
     public byte CorrectAnswers
     {
         get => _correctAnswers ?? 0;
-        init => _correctAnswers = value > 0
+        init => _correctAnswers = value >= 0
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public uint Result
+    public int ResultPoints
     {
-        get => _result ?? 0;
-        init => _result = value > 0
+        get => _resultPoints ?? 0;
+        init => _resultPoints = value >= 0
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CompletedAt
-    {
-        get => _completedAt ?? new DateTime();
-        init => _completedAt = value >= DateTime.Now
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public DateTime CompletedAt { get; init; }
+
+    public virtual List<DbQuestionAnswer> QuestionAnswers { get; init; } = new();
 }

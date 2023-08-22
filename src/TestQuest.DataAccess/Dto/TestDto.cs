@@ -25,7 +25,7 @@ public sealed record TestDto : BaseDto
     }
 
     public byte TotalQuestions { get; set; }
-    public string AuthorId { get; set; }
+    public string? AuthorId { get; set; }
 
     public byte AgeLimit 
     {
@@ -41,9 +41,9 @@ public sealed record TestDto : BaseDto
     }
 
     public TestStatus Status { get; init; }
-
-    public List<CategoryDto> Category { get; set; } = new();
-    public List<DbQuestion> Questions { get; set; } = new();
+    public List<CategoryDto> Category { get; init; } = new();
+    public List<CommentAndTestScoreDto> CommentAndTestScores{ get; init; } = new();
+    public List<DbQuestion> Questions { get; init; } = new();
 
     public string Description
     {
