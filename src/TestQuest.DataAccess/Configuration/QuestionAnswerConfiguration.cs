@@ -27,6 +27,12 @@ public sealed class QuestionAnswerConfiguration : IEntityTypeConfiguration<DbQue
             .HasColumnName("answer")
             .HasColumnType("VARCHAR")
             .IsRequired();
+
+        builder
+            .Property(qa => qa.CorrectAnswer)
+            .HasColumnName("correct_answer")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
         
         builder
             .Property(qa => qa.Status)

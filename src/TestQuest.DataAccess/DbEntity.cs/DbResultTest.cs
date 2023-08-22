@@ -5,6 +5,7 @@ public record DbResultTest : BaseDbEntity
     private readonly string? _userId;
     private readonly byte? _correctAnswers;
     private readonly uint? _resultPoints;
+    private readonly string? _testId;
 
     public string UserId
     {
@@ -12,6 +13,14 @@ public record DbResultTest : BaseDbEntity
         init => _userId = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
+
+    public string TestId 
+    {
+        get => _testId ?? string.Empty;
+        init => _testId = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
+
     public byte CorrectAnswers
     {
         get => _correctAnswers ?? 0;

@@ -4,6 +4,7 @@ public record QuestionAnswerDto : BaseDto
 {
     private readonly string? _questionText;
     private readonly string? _answer;
+    private readonly string? _correctAnswer;
     public string QuestionText
     {
         get => _questionText ?? string.Empty;
@@ -14,6 +15,13 @@ public record QuestionAnswerDto : BaseDto
     {
         get => _answer ?? string.Empty;
         init => _answer = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
+
+    public string CorrectAnswer
+    {
+        get => _correctAnswer?? string.Empty;
+        init => _correctAnswer = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
     public QuestionStatus Status { get; set; }

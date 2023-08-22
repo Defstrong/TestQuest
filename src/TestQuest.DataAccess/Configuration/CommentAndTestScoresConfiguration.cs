@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace TestQuest.DataAccess;
 
-public sealed class CommentAndTestScore : IEntityTypeConfiguration<DbCommentAndTestScore>
+public sealed class CommentAndTestScoreConfiguration : IEntityTypeConfiguration<DbCommentAndTestScore>
 {
     public void Configure(EntityTypeBuilder<DbCommentAndTestScore> builder)
     {
@@ -13,6 +13,12 @@ public sealed class CommentAndTestScore : IEntityTypeConfiguration<DbCommentAndT
         builder
             .Property(cts => cts.Id)
             .HasColumnName("id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
+            .Property(cts => cts.UserId)
+            .HasColumnName("user_id")
             .HasColumnType("VARCHAR")
             .IsRequired();
 

@@ -143,5 +143,22 @@ public class MapperConfiguration : Profile
             .ForMember(dest =>
                 dest.Status,
                 opt => opt.MapFrom(src => src.Status)).ReverseMap();
+
+        CreateMap<CommentAndTestScoreDto, DbCommentAndTestScore>()
+            .ForMember(dest =>
+                dest.Id,
+                opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest =>
+                dest.UserId,
+                opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest =>
+                dest.TestId,
+                opt => opt.MapFrom(src => src.TestId))
+            .ForMember(dest =>
+                dest.CommentText,
+                opt => opt.MapFrom(src => src.CommentText))
+            .ForMember(dest =>
+                dest.Score,
+                opt => opt.MapFrom(src => src.Score)).ReverseMap();
     }
 }

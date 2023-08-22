@@ -36,7 +36,13 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
 
         builder
             .Property(rt => rt.UserId)
-            .HasColumnName("id_user")
+            .HasColumnName("user_id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
+            .Property(rt => rt.TestId)
+            .HasColumnName("test_id")
             .HasColumnType("VARCHAR")
             .IsRequired();
         

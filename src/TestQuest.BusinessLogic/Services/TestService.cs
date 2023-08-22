@@ -85,58 +85,13 @@ public sealed class TestService : ITestService
         return updateResult;
     }
 
-    public async Task ResultTestAsync(string testId, UserDto user, List<string> answers, CancellationToken token = default)
+    public Task<bool> SaveResultAsync(ResultTestDto entity, CancellationToken token = default)
     {
-        ArgumentNullException.ThrowIfNull(answers);
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentException.ThrowIfNullOrEmpty(testId);
-        
-        byte correctedAnswers = 0;
-        var test = await GetAsync(testId, token);
-        var questions = test.Questions.ToList();
-        List<QuestionAnswerDto> questionAnswers = new();
-        for(int i = 0; i < answers.Count(); i++)
-        {
-            questionAnswers.Add(new(){
-                QuestionText = questions[i].Answer,
-                Answer = answers[i],
-                Status = questions[i].Answer == answers[i] ? QuestionStatus.Correct : QuestionStatus.Wrong
-            });
+        ArgumentNullException.ThrowIfNull(entity);
 
-            if(questions[i].Answer == answers[i])
-                correctedAnswers++;
-        }
+        var dbResultTest = _mapper.Map<DbResultTest>(entity);
+        var saveResultAsync = _testRepository.SaveResultAsync(dbResultTest, token);
 
-        user.RatingPoints += correctedAnswers * ((int)test.Difficulty + 1);
-        AchievementResult(user, correctedAnswers, questions.Count(), test.Difficulty);
-
-        ResultTestDto resultTest = new() {
-            UserId = user.Id,
-            CorrectAnswers = correctedAnswers,
-            ResultPoints = user.RatingPoints,
-            CompletedAt = DateTime.Now,
-            QuestionAnswers = _mapper.Map<List<DbQuestionAnswer>>(questionAnswers)
-        };
-
-        await _testRepository.SaveResultAsync(_mapper.Map<DbResultTest>(resultTest), token);
-    }
-
-    private void AchievementResult(UserDto user, int correctAnswers, int countQuestion, Difficulty difficulty)
-    {
-        if(correctAnswers == countQuestion && difficulty == Difficulty.Impissible 
-            && user.Achievements.Contains(Achievement.TestExtender))
-                user.Achievements.Add(Achievement.TestExtender);
-
-        if(user.RatingPoints >= 100 && user.Achievements.Contains(Achievement.Connoisseur))
-            user.Achievements.Add(Achievement.Connoisseur);
-
-        if(user.RatingPoints >= 1000 && user.Achievements.Contains(Achievement.KnowledgeMaster))
-            user.Achievements.Add(Achievement.KnowledgeMaster);
-
-        if(user.RatingPoints >= 10000 && user.Achievements.Contains(Achievement.Guru))
-            user.Achievements.Add(Achievement.Guru);
-
-        if(user.RatingPoints >= 5000 && user.Achievements.Contains(Achievement.RapidLearner))
-            user.Achievements.Add(Achievement.RapidLearner);
+        return saveResultAsync;
     }
 }

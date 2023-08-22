@@ -8,13 +8,16 @@ public sealed class TestController : Controller
 {
     private readonly ITestService _testService;
     private readonly IUserService _userService;
-    private readonly IUserRepository _userRepository;
-    public TestController(ITestService testService, IUserService userService, IUserRepository userRepository)
+    private readonly IResultTestService _resultTestService;
+    public TestController(ITestService testService, IUserService userService, IResultTestService resultTestService)
     {
         ArgumentNullException.ThrowIfNull(testService);
+        ArgumentNullException.ThrowIfNull(userService);
+        ArgumentNullException.ThrowIfNull(resultTestService);
+
         _testService = testService;
         _userService = userService;
-        _userRepository = userRepository;
+        _resultTestService = resultTestService;
     }
 
     [HttpGet]
@@ -71,14 +74,24 @@ public sealed class TestController : Controller
     }
 
     [HttpPost("result/{id}")]
-    public async Task<bool> Result([FromRoute]string id, List<string> answers, CancellationToken token = default)
+    public async Task<IActionResult> Result([FromRoute]string id, List<string> answers, CancellationToken token = default)
     {
         var user = await _userService.GetAsync(User.FindFirst("Id").Value);
-        await _testService.ResultTestAsync(id, user, answers, token);
-        var updateResult = await _userService.UpdateAsync(user);
+        var resulteTest = await _resultTestService.ResultTestAsync(id, user, answers, token);
+        
+        await _userService.UpdateAsync(user);
 
-        // if(points is null)
-            // RedirectToMyAccount
-        return updateResult;
+        return View(resulteTest);
+    }
+
+    [HttpPost("comment/{id}")]
+    public async Task<RedirectResult> CommentAndScoreTest([FromRoute]string id, CommentAndTestScoreDto commentAndTestScore, CancellationToken token = default)
+    {
+        commentAndTestScore.TestId = id;
+        commentAndTestScore.UserId = User.FindFirst("Id").Value;
+        var test = await _testService.GetAsync(id, token);
+        test.CommentAndTestScores.Add(commentAndTestScore);
+        await _testService.UpdateAsync(test);
+        return Redirect("/test/tests");
     }
 }

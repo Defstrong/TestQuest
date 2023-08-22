@@ -3,9 +3,7 @@ namespace TestQuest.DataAccess;
 public record CommentAndTestScoreDto : BaseDto
 {
     private readonly string? _commentText;
-    private readonly string? _testId;
     private readonly byte? _score;
-    private readonly string? _userId;
 
     public string CommentText
     {
@@ -21,19 +19,9 @@ public record CommentAndTestScoreDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public string TestId 
-    {
-        get => _testId ?? string.Empty;
-        init => _testId = value is { Length: > 0 }
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public string TestId { get; set; }
 
-    public string UserId
-    {
-        get => _userId ?? string.Empty;
-        init => _userId = value is { Length: > 0 }
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public string UserId { get; set; }
 
     public DbTest Test { get; init; } = new();
 }

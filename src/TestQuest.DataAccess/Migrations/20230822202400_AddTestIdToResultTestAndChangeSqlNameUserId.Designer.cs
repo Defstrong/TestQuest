@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestQuest.DataAccess;
@@ -11,9 +12,11 @@ using TestQuest.DataAccess;
 namespace TestQuest.DataAccess.Migrations
 {
     [DbContext(typeof(TestQuestDbContext))]
-    partial class TestQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230822202400_AddTestIdToResultTestAndChangeSqlNameUserId")]
+    partial class AddTestIdToResultTestAndChangeSqlNameUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

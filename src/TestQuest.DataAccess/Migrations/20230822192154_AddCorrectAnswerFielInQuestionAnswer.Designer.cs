@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestQuest.DataAccess;
@@ -11,9 +12,11 @@ using TestQuest.DataAccess;
 namespace TestQuest.DataAccess.Migrations
 {
     [DbContext(typeof(TestQuestDbContext))]
-    partial class TestQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230822192154_AddCorrectAnswerFielInQuestionAnswer")]
+    partial class AddCorrectAnswerFielInQuestionAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,8 +74,7 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("user_id");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -190,15 +192,10 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("result");
 
-                    b.Property<string>("TestId")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("test_id");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("VARCHAR")
-                        .HasColumnName("user_id");
+                        .HasColumnName("id_user");
 
                     b.HasKey("Id");
 
