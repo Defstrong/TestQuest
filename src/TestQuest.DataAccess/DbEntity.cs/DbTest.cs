@@ -35,7 +35,7 @@ public record DbTest : BaseDbEntity
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CreatedAt { get; init; } = DateTime.Now;
+    public DateTime CreatedAt { get; init; } 
 
     public virtual List<DbCategory> Category { get; init; } = new();
     public virtual List<DbQuestion> Questions { get; init; } = new();

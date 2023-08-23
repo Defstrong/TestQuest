@@ -23,7 +23,8 @@ public class BaseRepository<T> : IBaseRepository<T>
         if(entity is null)
             return false;
 
-        _db.Set<T>().Remove(entity);
+        _db.Entry(entity).State = EntityState.Deleted;
+
         int deleteResult = await _db.SaveChangesAsync(token);
         return deleteResult > 0;
     }

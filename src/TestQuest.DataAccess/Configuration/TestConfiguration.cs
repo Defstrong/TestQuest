@@ -84,14 +84,18 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .HasMany(t => t.Category)
             .WithOne(t => t.Test)
             .HasConstraintName("category")
-            .HasForeignKey(t => t.TestId)
-            .IsRequired();
+            .HasForeignKey(t => t.TestId);
 
         builder
             .HasMany(t => t.CommentAndTestScores)
             .WithOne(t => t.Test)
             .HasConstraintName("comment_and_test_scores")
-            .HasForeignKey(t => t.TestId)
-            .IsRequired();
+            .HasForeignKey(t => t.TestId);
+
+        builder
+            .HasMany(t => t.Questions)
+            .WithOne(t => t.Test)
+            .HasConstraintName("comment_and_test_scores")
+            .HasForeignKey(t => t.TestId);
     }
 }

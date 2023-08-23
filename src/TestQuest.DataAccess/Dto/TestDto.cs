@@ -5,7 +5,6 @@ public sealed record TestDto : BaseDto
     private readonly string? _name;
     private readonly byte? _timeLimit;
     private readonly byte? _ageLimit;
-    private readonly DateTime? _createdAt;
     private readonly string? _description;
 
     public string Name
@@ -34,11 +33,7 @@ public sealed record TestDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CreatedAt
-    {
-        get => _createdAt ?? new DateTime();
-        init => _createdAt = DateTime.Now;
-    }
+    public DateTime CreatedAt { get; init; } = DateTime.Now;
 
     public TestStatus Status { get; init; }
     public List<CategoryDto> Category { get; init; } = new();

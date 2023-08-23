@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TestQuest.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ChangeFiledResultTest : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,8 @@ namespace TestQuest.DataAccess.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
-                    id_user = table.Column<string>(type: "VARCHAR", nullable: false),
+                    user_id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    test_id = table.Column<string>(type: "VARCHAR", nullable: false),
                     correct_answers = table.Column<int>(type: "INT", nullable: false),
                     result = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     completed_at = table.Column<DateTime>(type: "DATE", nullable: false)
@@ -37,9 +38,9 @@ namespace TestQuest.DataAccess.Migrations
                     time_limit = table.Column<int>(type: "INT", nullable: false),
                     total_questions = table.Column<int>(type: "INT", nullable: false),
                     author_id = table.Column<string>(type: "VARCHAR", nullable: false),
-                    AgeLimit = table.Column<byte>(type: "smallint", nullable: false),
+                    age_limit = table.Column<byte>(type: "SMALLINT", nullable: false),
                     created_at = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    description = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,14 +73,16 @@ namespace TestQuest.DataAccess.Migrations
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     question_text = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     answer = table.Column<string>(type: "VARCHAR", nullable: false),
-                    status = table.Column<string>(type: "VARCHAR", nullable: false)
+                    correct_answer = table.Column<string>(type: "VARCHAR", nullable: false),
+                    status = table.Column<string>(type: "VARCHAR", nullable: false),
+                    ResultTestId = table.Column<string>(type: "VARCHAR", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_question_answer", x => x.id);
                     table.ForeignKey(
-                        name: "questions_answers",
-                        column: x => x.id,
+                        name: "result_test_id",
+                        column: x => x.ResultTestId,
                         principalTable: "result_test",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -91,14 +94,35 @@ namespace TestQuest.DataAccess.Migrations
                 {
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     category = table.Column<string>(type: "VARCHAR", nullable: false),
-                    TestId = table.Column<string>(type: "VARCHAR", nullable: false)
+                    test_id = table.Column<string>(type: "VARCHAR", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_category", x => x.id);
                     table.ForeignKey(
                         name: "category",
-                        column: x => x.TestId,
+                        column: x => x.test_id,
+                        principalTable: "test",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "comment_and_test_score",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    comment_text = table.Column<string>(type: "VARCHAR", maxLength: 5000, nullable: false),
+                    score = table.Column<byte>(type: "SMALLINT", nullable: false),
+                    test_id = table.Column<string>(type: "VARCHAR", nullable: false),
+                    user_id = table.Column<string>(type: "VARCHAR", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comment_and_test_score", x => x.id);
+                    table.ForeignKey(
+                        name: "comment_and_test_scores",
+                        column: x => x.test_id,
                         principalTable: "test",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -111,16 +135,17 @@ namespace TestQuest.DataAccess.Migrations
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     question = table.Column<string>(type: "VARCHAR", maxLength: 500, nullable: false),
                     answer = table.Column<string>(type: "VARCHAR", maxLength: 100, nullable: false),
-                    DbTestId = table.Column<string>(type: "VARCHAR", nullable: true)
+                    test_id = table.Column<string>(type: "VARCHAR", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_question", x => x.id);
                     table.ForeignKey(
-                        name: "FK_question_test_DbTestId",
-                        column: x => x.DbTestId,
+                        name: "comment_and_test_scores",
+                        column: x => x.test_id,
                         principalTable: "test",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,33 +154,43 @@ namespace TestQuest.DataAccess.Migrations
                 {
                     id = table.Column<string>(type: "VARCHAR", nullable: false),
                     option = table.Column<string>(type: "VARCHAR", nullable: false),
-                    QuestionId = table.Column<string>(type: "VARCHAR", nullable: false)
+                    question_id = table.Column<string>(type: "VARCHAR", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_options", x => x.id);
                     table.ForeignKey(
-                        name: "options",
-                        column: x => x.QuestionId,
+                        name: "FK_options_question_question_id",
+                        column: x => x.question_id,
                         principalTable: "question",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_category_TestId",
+                name: "IX_category_test_id",
                 table: "category",
-                column: "TestId");
+                column: "test_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_options_QuestionId",
+                name: "IX_comment_and_test_score_test_id",
+                table: "comment_and_test_score",
+                column: "test_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_options_question_id",
                 table: "options",
-                column: "QuestionId");
+                column: "question_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_question_DbTestId",
+                name: "IX_question_test_id",
                 table: "question",
-                column: "DbTestId");
+                column: "test_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_question_answer_ResultTestId",
+                table: "question_answer",
+                column: "ResultTestId");
         }
 
         /// <inheritdoc />
@@ -163,6 +198,9 @@ namespace TestQuest.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "category");
+
+            migrationBuilder.DropTable(
+                name: "comment_and_test_score");
 
             migrationBuilder.DropTable(
                 name: "options");

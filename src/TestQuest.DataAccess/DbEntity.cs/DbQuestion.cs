@@ -23,6 +23,8 @@ public record DbQuestion : BaseDbEntity
         init => _answer = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
+    public string TestId { get; set; }
 
+    public virtual DbTest Test { get; init; } = new();
     public virtual List<DbOption> Options { get; init; } = new();
 }

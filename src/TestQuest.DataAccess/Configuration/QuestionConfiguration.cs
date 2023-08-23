@@ -16,6 +16,12 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
             .HasColumnName("id")
             .HasColumnType("VARCHAR")
             .IsRequired();
+            
+        builder
+            .Property(q => q.TestId)
+            .HasColumnName("test_id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
 
         builder
             .Property(q => q.Answer)
@@ -30,11 +36,5 @@ public sealed class QuestionConfiguration : IEntityTypeConfiguration<DbQuestion>
             .HasColumnType("VARCHAR")
             .HasMaxLength(500)
             .IsRequired();
-
-        builder
-            .HasMany(q => q.Options)
-            .WithOne(q => q.Question)
-            .HasConstraintName("options")
-            .HasForeignKey(q => q.QuestionId);
     }
 }

@@ -12,8 +12,8 @@ using TestQuest.DataAccess;
 namespace TestQuest.DataAccess.Migrations
 {
     [DbContext(typeof(TestQuestDbContext))]
-    [Migration("20230822182202_AddCommentAndTestScoreTableForTestTable")]
-    partial class AddCommentAndTestScoreTableForTestTable
+    [Migration("20230822215957_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,8 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -118,18 +119,20 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("answer");
 
-                    b.Property<string>("DbTestId")
-                        .HasColumnType("VARCHAR");
-
                     b.Property<string>("Question")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR")
                         .HasColumnName("question");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DbTestId");
+                    b.HasIndex("TestId");
 
                     b.ToTable("question", (string)null);
                 });
@@ -144,6 +147,11 @@ namespace TestQuest.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR")
                         .HasColumnName("answer");
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("correct_answer");
 
                     b.Property<string>("QuestionText")
                         .IsRequired()
@@ -187,10 +195,15 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("result");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("VARCHAR")
-                        .HasColumnName("id_user");
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -338,17 +351,21 @@ namespace TestQuest.DataAccess.Migrations
                         .WithMany("Options")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("options");
+                        .IsRequired();
 
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>
                 {
-                    b.HasOne("TestQuest.DataAccess.DbTest", null)
+                    b.HasOne("TestQuest.DataAccess.DbTest", "Test")
                         .WithMany("Questions")
-                        .HasForeignKey("DbTestId");
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("comment_and_test_scores");
+
+                    b.Navigation("Test");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestionAnswer", b =>

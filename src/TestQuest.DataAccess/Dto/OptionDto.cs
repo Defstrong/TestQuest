@@ -10,5 +10,6 @@ public sealed record OptionDto : BaseDto
         init => _option = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-    public QuestionDto Question { get; set; }
+    public List<QuestionDto> Question { get; set; }
+    
 }

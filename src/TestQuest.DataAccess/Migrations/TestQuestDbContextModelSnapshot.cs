@@ -116,18 +116,20 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("answer");
 
-                    b.Property<string>("DbTestId")
-                        .HasColumnType("VARCHAR");
-
                     b.Property<string>("Question")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR")
                         .HasColumnName("question");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DbTestId");
+                    b.HasIndex("TestId");
 
                     b.ToTable("question", (string)null);
                 });
@@ -346,17 +348,21 @@ namespace TestQuest.DataAccess.Migrations
                         .WithMany("Options")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("options");
+                        .IsRequired();
 
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>
                 {
-                    b.HasOne("TestQuest.DataAccess.DbTest", null)
+                    b.HasOne("TestQuest.DataAccess.DbTest", "Test")
                         .WithMany("Questions")
-                        .HasForeignKey("DbTestId");
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("comment_and_test_scores");
+
+                    b.Navigation("Test");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestionAnswer", b =>
