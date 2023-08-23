@@ -29,6 +29,13 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<DbUser>
             .HasColumnType("VARCHAR")
             .HasMaxLength(10)
             .IsRequired();
+
+        builder
+            .Property(u => u.AccessLevel)
+            .HasColumnName("access_level")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(10)
+            .IsRequired();
         
         builder
             .Property(u => u.Role)

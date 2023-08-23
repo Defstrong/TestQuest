@@ -19,9 +19,11 @@ public record CommentAndTestScoreDto : BaseDto
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public string TestId { get; set; }
+    public string UserName { get; set; }
 
-    public string UserId { get; set; }
+    public string? TestId { get; set; }
+
+    public string? UserId { get; set; }
 
     public DbTest Test { get; init; } = new();
 }

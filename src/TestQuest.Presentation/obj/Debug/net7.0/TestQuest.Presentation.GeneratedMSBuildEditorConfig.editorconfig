@@ -40,22 +40,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/Test/MyTests.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxNeVRlc3RzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/Test/Passing.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxQYXNzaW5nLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/Test/Result.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxSZXN1bHQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/Test/Test.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxUZXN0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/Test/Tests.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxUZXN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +50,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/User/LeaderBoard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMZWFkZXJCb2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/User/PassingTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQYXNzaW5nVGVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/User/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/User/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/User/UserTestCommentAndScore.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyVGVzdENvbW1lbnRBbmRTY29yZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Documents/TestQuest/src/TestQuest.Presentation/Views/_ViewImports.cshtml]

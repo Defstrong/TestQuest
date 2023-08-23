@@ -29,6 +29,7 @@ public record DbUser : BaseDbEntity
     }
 
     public Gender Gender { get; init; }
+    public AccessLevel AccessLevel { get; init; }
 
     public byte Age
     {

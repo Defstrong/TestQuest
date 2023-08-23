@@ -116,6 +116,9 @@ public class MapperConfiguration : Profile
                 dest.Gender,
                 opt => opt.MapFrom(src => src.Gender))
             .ForMember(dest =>
+                dest.AccessLevel,
+                opt => opt.MapFrom(src => src.AccessLevel))
+            .ForMember(dest =>
                 dest.Age,
                 opt => opt.MapFrom(src => src.Age))
             .ForMember(dest =>

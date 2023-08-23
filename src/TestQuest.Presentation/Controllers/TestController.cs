@@ -7,7 +7,6 @@ namespace TestQuest.Presentation;
 public sealed class TestController : Controller
 {
     private readonly ITestService _testService;
-    private readonly IUserService _userService;
     private readonly IResultTestService _resultTestService;
     public TestController(ITestService testService, IUserService userService, IResultTestService resultTestService)
     {
@@ -16,7 +15,6 @@ public sealed class TestController : Controller
         ArgumentNullException.ThrowIfNull(resultTestService);
 
         _testService = testService;
-        _userService = userService;
         _resultTestService = resultTestService;
     }
 
@@ -29,20 +27,20 @@ public sealed class TestController : Controller
         return View();
     }
 
-    [HttpGet("delete/{id}")]
-    public Task<bool> Delete([FromRoute] string id, CancellationToken token = default)
-    {
-        var deleteResult = _testService.DeleteAsync(id, token);
-
-        return deleteResult;
-    }
-
     [HttpPost]
-    public async Task<bool> CreateTest(TestDto testDto, CancellationToken token = default)
+    public async Task<RedirectResult> CreateTest(TestDto testDto, CancellationToken token = default)
     {
         testDto.AuthorId = User.FindFirst("Id").Value;
-        var createResult = await _testService.CreateAsync(testDto, token);
-        return createResult;
+        await _testService.CreateAsync(testDto, token);
+        return Redirect("/test/tests");
+    }
+
+    [HttpGet("delete/{id}")]
+    public async Task<RedirectResult> DeleteTest([FromRoute] string id, CancellationToken token = default)
+    {
+        await _testService.DeleteAsync(id, token);
+
+        return Redirect("/personalarea");
     }
 
     [HttpGet("tests")]
@@ -54,76 +52,47 @@ public sealed class TestController : Controller
         return View(tests);
     }
 
-    [HttpGet("mytests")]
-    public async Task<IActionResult> MyTests(CancellationToken token = default)
+    [HttpPost("tests")]
+    public async Task<IActionResult> Tests(string searchTestWithName, CancellationToken token = default)
     {
-        if(!User.Identity.IsAuthenticated)
-            return RedirectToAction("Registration", "Login");
-        var tests = await _testService.GetAllUserTestAsync(User.FindFirst("Id").Value, token);
+        var tests = await _testService.SearchTestAsync(searchTestWithName, User.FindFirst("Id").Value, token);
         return View(tests);
-    }
-
-    [HttpGet("passing")]
-    public async Task<IActionResult> PassingTest(CancellationToken token = default)
-    {
-        if(!User.Identity.IsAuthenticated)
-            return RedirectToAction("Registration", "Login");
-        var tests = await _testService.GetAsync(token);
-        return View(tests);
-    }
-
-    [HttpGet("test/{id}")]
-    public async Task<IActionResult> Test([FromRoute]string id, CancellationToken token = default)
-    {
-        if(!User.Identity.IsAuthenticated)
-            return RedirectToAction("Registration", "Login");
-        var test = await _testService.GetAsync(id, token);
-        return View(test);
-    }
-
-    [HttpPost("result/{id}")]
-    public async Task<IActionResult> Result([FromRoute]string id, List<string> answers, CancellationToken token = default)
-    {
-        var user = await _userService.GetAsync(User.FindFirst("Id").Value);
-        var resulteTest = await _resultTestService.ResultTestAsync(id, user, answers, token);
-
-        await _userService.UpdateAsync(user);
-
-        return View(resulteTest);
     }
 
     [HttpPost("comment/{id}")]
     public async Task<RedirectResult> CommentAndScoreTest([FromRoute]string id, CommentAndTestScoreDto commentAndTestScore, CancellationToken token = default)
     {
+        // Console.WriteLine(commentAndTestScore);
+        commentAndTestScore.Id = Guid.NewGuid().ToString();
         commentAndTestScore.TestId = id;
         commentAndTestScore.UserId = User.FindFirst("Id").Value;
+        commentAndTestScore.UserName = User.FindFirst("UserName").Value;
+
         var test = await _testService.GetAsync(id, token);
+        foreach(var ii in test.Questions.SelectMany(q => q.Options))
+            Console.WriteLine(ii);
+
         test.CommentAndTestScores.Add(commentAndTestScore);
         await _testService.UpdateAsync(test);
+
+        test.Questions.SelectMany(q => q.Options);
+        foreach(var ii in test.Questions.SelectMany(q => q.Options))
+            Console.WriteLine(ii);
+
         return Redirect("/test/tests");
     }
-
 
     [HttpGet("update/{id}")]
     public async Task<IActionResult> UpdateTest([FromRoute]string id, CancellationToken token = default)
     {
         var test = await _testService.GetAsync(id, token);
-        Console.WriteLine(test);
-        foreach(var ii in test.Questions)
-            Console.WriteLine(ii);
         return View(test);
     }
 
     [HttpPost("update/{id}")]
     public async Task<RedirectResult> UpdateTest(TestDto test, CancellationToken token = default)
     {
-        Console.WriteLine(test);
-        foreach(var ii in test.Questions)
-            Console.WriteLine(ii);
-
-        foreach(var ii in test.Questions.Select(q => q.Options))
-            Console.WriteLine(ii);
         await _testService.UpdateAsync(test, token);
-        return Redirect("/test/tests");
+        return Redirect("/personalarea");
     }
 }

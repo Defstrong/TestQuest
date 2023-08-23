@@ -21,9 +21,11 @@ public class LoginController : Controller
     public IActionResult Registration() => View();
 
     [HttpPost("/registration")]
-    public Task<bool> Registration(UserDto user, CancellationToken token = default)
+    public async Task<RedirectResult> Registration(UserDto user, CancellationToken token = default)
     {
-        return _userService.CreateAsync(user, token);
+        await _userService.CreateAsync(user, token);
+
+        return Redirect("/");
     }
 
     [HttpGet]
@@ -34,7 +36,6 @@ public class LoginController : Controller
     {
         ArgumentNullException.ThrowIfNull(singInData);
         var userDefinition = await _userService.GetAsync(singInData);
-        Console.WriteLine(userDefinition);
 
         if(userDefinition is not null)
         {

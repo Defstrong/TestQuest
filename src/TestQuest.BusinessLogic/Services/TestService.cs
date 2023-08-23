@@ -94,4 +94,14 @@ public sealed class TestService : ITestService
 
         return saveResultAsync;
     }
+
+    public async Task<List<TestDto>> SearchTestAsync(string str, string userId, CancellationToken token = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(str);
+
+        var dbTests = await _testRepository.SearchTestAsync(str, userId, token);
+        var tests = _mapper.Map<List<TestDto>>(dbTests);
+
+        return tests;
+    }
 }

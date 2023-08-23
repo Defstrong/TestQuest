@@ -34,6 +34,6 @@ public record DbCommentAndTestScore: BaseDto
         init => _userId = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
-
     public virtual DbTest Test { get; init; } = new();
+    public string? UserName { get; set; }
 }

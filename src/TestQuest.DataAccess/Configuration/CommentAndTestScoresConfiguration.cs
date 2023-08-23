@@ -23,6 +23,12 @@ public sealed class CommentAndTestScoreConfiguration : IEntityTypeConfiguration<
             .IsRequired();
 
         builder
+            .Property(cts => cts.UserName)
+            .HasColumnName("user_name")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
             .Property(cts => cts.CommentText)
             .HasColumnName("comment_text")
             .HasColumnType("VARCHAR")

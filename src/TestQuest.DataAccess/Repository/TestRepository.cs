@@ -27,4 +27,11 @@ public sealed class TestRepository : BaseRepository<DbTest>, ITestRepository
 
         return allUserTests; 
     }
+
+    public async Task<List<DbTest>> SearchTestAsync(string str, string userId, CancellationToken token = default)
+    {
+        
+        var tests = await _db.Tests.Where(t => EF.Functions.Like(t.Name, "%"+str+"%") && t.AuthorId != userId).ToListAsync();
+        return tests ?? new();
+    }
 }

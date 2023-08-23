@@ -1,0 +1,32 @@
+@using TestQuest.DataAccess;
+@model IEnumerable<TestDto>;
+@{
+    ViewData["Title"] = "Tests";
+    int i = 0;
+}
+@* @foreach(var ii in Model)
+{
+    <a href="test/@ii.Id" class="ii">@ii.Name</a><br/>
+} *@
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+</head>
+@foreach(var ii in Model)
+{
+    <pre><h1>@{i++;}@i.      NameTest: @ii.Name</h1></pre>
+
+    @foreach(var jj in ii.CommentAndTestScores)
+    {
+        <p>User name: @jj.UserName</p>
+        <p>Comment: @jj.CommentText</p>
+        <p>Score: @jj.Score</p>
+    }
+    @if(ii.CommentAndTestScores.Count() == 0)
+    {
+        <p>Comment: Empty</p>
+        <p>Score: Empty</p>
+    }
+}

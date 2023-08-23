@@ -37,8 +37,9 @@
 
         
         var labelQuestionAnswer = document.createElement("label");
-        labelQuestion.textContent = "Answer question"
+        labelQuestionAnswer.textContent = "Answer question"
         var drQuestionAnwer = document.createElement("br");
+        var second = document.createElement("br");
         var inputQuestionAnwer = document.createElement("input");
         inputQuestionAnwer.type = "text";
         inputQuestionAnwer.name = `Questions[${index}].Answer`;
@@ -69,11 +70,14 @@
 
         questionElement.appendChild(questionTitle);
         questionElement.appendChild(labelQuestion);
-        questionElement.appendChild(drQuestion);
+        questionElement.appendChild(second);
         questionElement.appendChild(inputQuestionText);
+        questionElement.appendChild(drQuestion);
+
         questionElement.appendChild(labelQuestionAnswer);
         questionElement.appendChild(drQuestionAnwer);
         questionElement.appendChild(inputQuestionAnwer);
+
         questionElement.appendChild(optionsContainer);
         testContainer.appendChild(questionElement);
     });

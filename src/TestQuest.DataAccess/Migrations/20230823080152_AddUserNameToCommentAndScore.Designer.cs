@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestQuest.DataAccess;
@@ -11,9 +12,11 @@ using TestQuest.DataAccess;
 namespace TestQuest.DataAccess.Migrations
 {
     [DbContext(typeof(TestQuestDbContext))]
-    partial class TestQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230823080152_AddUserNameToCommentAndScore")]
+    partial class AddUserNameToCommentAndScore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,12 +276,6 @@ namespace TestQuest.DataAccess.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("VARCHAR")
                         .HasColumnName("id");
-
-                    b.Property<string>("AccessLevel")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("access_level");
 
                     b.Property<string[]>("Achievements")
                         .IsRequired()

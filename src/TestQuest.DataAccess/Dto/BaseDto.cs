@@ -6,10 +6,5 @@ public abstract record BaseDto
     public BaseDto()
         => Id = Guid.NewGuid().ToString();
 
-    public string Id
-    {
-        get => _id ?? string.Empty;
-        init => _id = value is { Length: > 0 }
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public string Id { get; set; }
 }

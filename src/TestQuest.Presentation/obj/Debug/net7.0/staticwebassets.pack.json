@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\css\\tests.css",
+      "PackagePath": "staticwebassets\\css\\tests.css"
+    },
+    {
       "Id": "C:\\Users\\Asus\\Documents\\TestQuest\\src\\TestQuest.Presentation\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

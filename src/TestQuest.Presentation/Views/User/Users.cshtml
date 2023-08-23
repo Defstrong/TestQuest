@@ -1,9 +1,13 @@
 @using TestQuest.DataAccess;
-@model IEnumerable<TestDto>;
+@model IEnumerable<UserDto>;
 @{
     ViewData["Title"] = "Tests";
     int i = 0;
 }
+@* @foreach(var ii in Model)
+{
+    <a href="test/@ii.Id" class="ii">@ii.Name</a><br/>
+} *@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,12 +18,20 @@
     <thred>
         <th>№</th>
         <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Rating points</th>
     </thred>
     @foreach(var ii in Model)
     {
         <tbody> 
             <td>@{i++;}@i</td>
-            <td><a href="test/@ii.Id" class="ii">@ii.Name</a></td>
+            <td><a href="/user/admin/usertestsscore/@ii.Id" class="ii">@ii.Name</a></td>
+            <td>@ii.Email</td>
+            <td>@ii.Age</td>
+            <td>@ii.Gender</td>
+            <td>@ii.RatingPoints</td>
         </tbody>
     }
 </table>

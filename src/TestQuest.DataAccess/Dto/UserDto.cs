@@ -29,6 +29,7 @@ public record UserDto : BaseDto
     }
 
     public Gender Gender { get; init; }
+    public AccessLevel AccessLevel { get; set; } = AccessLevel.Full;
 
     public byte Age
     {

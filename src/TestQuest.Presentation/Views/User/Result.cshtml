@@ -30,7 +30,7 @@
         }
     </div>
 
-    <form asp-action="CommentAndScoreTest" method="post" asp-route-id="@Model.TestId">
+    <form asp-controller="Test" asp-action="CommentAndScoreTest" method="post" asp-route-id="@Model.TestId">
         <h2>Score test</h2>
         <select id="score" name="score" required>
             <option value="1">1</option>

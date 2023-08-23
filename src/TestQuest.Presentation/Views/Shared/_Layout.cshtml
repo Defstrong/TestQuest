@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+  string userName = "Undefined";
+  if(User.FindFirst("UserName") is not null)
+    userName = User.FindFirst("UserName").Value;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -53,13 +58,13 @@
         </li>
         <li>
           <span class="material-symbols-outlined menu">person</span>
-          <a href="/personalarea">UserName</a>
+          <a href="/personalarea">@userName</a>
         </li>
         <hr>
         <h4>Advanced</h4>
         <li>
-          <span class="material-symbols-outlined menu">ambient_screen</span>
-          <a href="/test/mytests">My tests</a>
+          <span class="material-symbols-outlined menu">group</span>
+          <a href="/user/admin">Users</a>
         </li>
         <li>
           <span class="material-symbols-outlined menu">monitoring</span>
