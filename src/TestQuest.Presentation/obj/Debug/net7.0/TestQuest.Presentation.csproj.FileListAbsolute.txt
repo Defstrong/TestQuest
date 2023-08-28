@@ -51,3 +51,12 @@ C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Mi
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Npgsql.dll
 C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Castle.Core.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Humanizer.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\Asus\Documents\TestQuest\src\TestQuest.Presentation\bin\Debug\net7.0\System.CodeDom.dll

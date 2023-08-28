@@ -1,0 +1,203 @@
+@using TestQuest.DataAccess;
+@model TestDto;
+@{
+    ViewData["Title"] = "Passing test " + Model.Name;
+    List<QuestionOption> questionOptions = new List<QuestionOption>();
+    
+    foreach(var ii in Model.Questions)
+    {
+        QuestionOption questionOption = new QuestionOption { 
+            Question = ii.Question, Options = ii.Options.Select(o => o.Option).ToList(), Answer = ii.Answer};
+
+        questionOptions.Add(questionOption);
+    }
+}
+
+@section Scripts
+{
+<script>
+    var questions = @Html.Raw(Json.Serialize(@questionOptions));
+
+    var testContainer = document.getElementById("test-container");
+
+    questions.forEach(function (questionData, index) {
+        var questionElement = document.createElement("div");
+        questionElement.classList.add("question");
+
+        var questionTitle = document.createElement("h3");
+        questionTitle.textContent = `Question ${index + 1}`
+        var labelQuestion = document.createElement("label");
+        labelQuestion.textContent = "Text question"
+        var drQuestion = document.createElement("br");
+        var inputQuestionText = document.createElement("input");
+        inputQuestionText.type = "text";
+        inputQuestionText.name = `Questions[${index}].Question`;
+        inputQuestionText.value = questionData.question;
+        inputQuestionText.required = false;
+
+        
+        var labelQuestionAnswer = document.createElement("label");
+        labelQuestionAnswer.textContent = "Answer question"
+        var drQuestionAnwer = document.createElement("br");
+        var second = document.createElement("br");
+        var inputQuestionAnwer = document.createElement("input");
+        inputQuestionAnwer.type = "text";
+        inputQuestionAnwer.name = `Questions[${index}].Answer`;
+        inputQuestionAnwer.value = questionData.answer;
+        inputQuestionAnwer.required = false;
+
+        var optionsContainer = document.createElement("div");
+        optionsContainer.classList.add("options");
+
+        questionData.options.forEach(function (option, optionIndex) {
+            var optionElement = document.createElement("div");
+            optionElement.classList.add("option");
+            var drd = document.createElement("br");
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = `Questions[${index}].Options[${optionIndex}].Option`;
+            input.value = option;
+            input.required = false;
+
+            var label = document.createElement("label");
+            label.textContent = `Option ${optionIndex + 1}`;
+
+            optionElement.appendChild(label);
+            optionElement.appendChild(drd);
+            optionElement.appendChild(input);
+            optionsContainer.appendChild(optionElement);
+        });
+
+        questionElement.appendChild(questionTitle);
+        questionElement.appendChild(labelQuestion);
+        questionElement.appendChild(second);
+        questionElement.appendChild(inputQuestionText);
+        questionElement.appendChild(drQuestion);
+
+        questionElement.appendChild(labelQuestionAnswer);
+        questionElement.appendChild(drQuestionAnwer);
+        questionElement.appendChild(inputQuestionAnwer);
+
+        questionElement.appendChild(optionsContainer);
+        testContainer.appendChild(questionElement);
+    });
+
+</script>
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; 
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: black;
+        }
+
+        .header-description {
+            font-size: 16px;
+            font-weight: 400;
+            color: black;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: black;
+        }
+
+        .question-options {
+            list-style: none;
+            padding-left: 0;
+            color: black;
+        }
+
+        .question-option {
+            margin-bottom: 10px;
+        }
+
+        .question-option input {
+            margin-right: 10px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 200px;
+            height: 40px;
+            margin: 0 auto;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+input,
+select,
+textarea {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  margin-left: 60px; /* Смещение на 60px вправо */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <form class="survey-form" asp-action="UpdateTest" asp-route-id="@Model.Id" method="POST">
+            <div class="header">
+                <h1 class="header">@Model.Name</h1>
+                <label>Name Test</label><br/>
+                <input type="text" value="@Model.Name" name="name">
+            </div>
+          <div id="test-container"></div>
+
+          <div class="dopfiel">
+            <label>Time Limit</label><br/>
+            <input type="number" value="@Model.TimeLimit" name="timelimit"><br/>
+            <label>Age limit</label><br/>
+            <input type="number" value="@Model.AgeLimit" name="agelimit"><br/>
+            <label>Description</label><br/>
+            <input type="text" value="@Model.Description" name="description">
+            @for (int i = 0; i < Model.Questions.Count(); i++)
+            {
+                @Html.HiddenFor(m => m.Questions[i].Id)
+                @for (int j = 0; j < Model.Questions[i].Options.Count(); j++)
+                {
+                    @Html.HiddenFor(m => m.Questions[i].Options[j].QuestionId)
+                    @Html.HiddenFor(m => m.Questions[i].Options[j].Id)
+                }
+            }
+            @Html.HiddenFor(m => m.Difficulty)
+            @Html.HiddenFor(m => m.Category)
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.AuthorId)
+          </div>
+          <button type ="submit" class ="submit-button">Edit</button> 
+        </form> 
+    </div> 
+</body> 
+</html> 

@@ -28,7 +28,7 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
             .HasColumnType("INT");
 
         builder
-            .Property(rt => rt.Result)
+            .Property(rt => rt.ResultPoints)
             .HasColumnName("result")
             .HasColumnType("VARCHAR")
             .HasMaxLength(500)
@@ -36,8 +36,21 @@ public sealed class ResultTestConfiguration : IEntityTypeConfiguration<DbResultT
 
         builder
             .Property(rt => rt.UserId)
-            .HasColumnName("id_user")
+            .HasColumnName("user_id")
             .HasColumnType("VARCHAR")
+            .IsRequired();
+
+        builder
+            .Property(rt => rt.TestId)
+            .HasColumnName("test_id")
+            .HasColumnType("VARCHAR")
+            .IsRequired();
+        
+        builder
+            .HasMany(rt => rt.QuestionAnswers)
+            .WithOne(rt => rt.ResultTest)
+            .HasConstraintName("result_test_id")
+            .HasForeignKey(rt => rt.ResultTestId)
             .IsRequired();
     }
 }

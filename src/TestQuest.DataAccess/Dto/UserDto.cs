@@ -4,7 +4,6 @@ public record UserDto : BaseDto
 {
     private readonly string? _name;
     private readonly byte? _age;
-    private readonly int? _ratingPoints;
     private readonly string? _email;
     private readonly string? _password;
 
@@ -30,6 +29,7 @@ public record UserDto : BaseDto
     }
 
     public Gender Gender { get; init; }
+    public AccessLevel AccessLevel { get; set; } = AccessLevel.Full;
 
     public byte Age
     {
@@ -40,7 +40,7 @@ public record UserDto : BaseDto
 
     public int RatingPoints { get; set; }
 
-    public List<Achievement> Achievements { get; init; } = new();
+    public List<Achievement> Achievements { get; set; } = new();
 
-    public Role Role { get; init; }
+    public Role Role { get; init; } = Role.User;
 }

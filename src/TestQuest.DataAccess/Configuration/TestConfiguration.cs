@@ -66,12 +66,36 @@ public sealed class TestConfiguration : IEntityTypeConfiguration<DbTest>
             .HasColumnType("VARCHAR")
             .HasMaxLength(20)
             .IsRequired();
+
+        builder
+            .Property(t => t.AgeLimit)
+            .HasColumnName("age_limit")
+            .HasColumnType("SMALLINT")
+            .IsRequired();
         
+        builder
+            .Property(t => t.Description)
+            .HasColumnName("description")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(500)
+            .IsRequired();
+
         builder
             .HasMany(t => t.Category)
             .WithOne(t => t.Test)
             .HasConstraintName("category")
-            .HasForeignKey(t => t.TestId)
-            .IsRequired();
+            .HasForeignKey(t => t.TestId);
+
+        builder
+            .HasMany(t => t.CommentAndTestScores)
+            .WithOne(t => t.Test)
+            .HasConstraintName("comment_and_test_scores")
+            .HasForeignKey(t => t.TestId);
+
+        builder
+            .HasMany(t => t.Questions)
+            .WithOne(t => t.Test)
+            .HasConstraintName("comment_and_test_scores")
+            .HasForeignKey(t => t.TestId);
     }
 }

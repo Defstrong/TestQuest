@@ -1,6 +1,6 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbOption : BaseDbEntity
+public record DbOption : BaseDbEntity
 {
     private readonly string? _option;
 
@@ -17,5 +17,5 @@ public sealed record DbOption : BaseDbEntity
     }
 
     public string QuestionId { get; set; }
-    public DbQuestion Question { get; set; } = new();
+    public virtual DbQuestion Question { get; set; } = new();
 }

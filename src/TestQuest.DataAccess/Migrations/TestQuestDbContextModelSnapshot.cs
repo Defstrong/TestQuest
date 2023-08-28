@@ -17,7 +17,10 @@ namespace TestQuest.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -35,13 +38,52 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("TestId")
                         .IsRequired()
-                        .HasColumnType("VARCHAR");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TestId");
 
                     b.ToTable("category", (string)null);
+                });
+
+            modelBuilder.Entity("TestQuest.DataAccess.DbCommentAndTestScore", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("comment_text");
+
+                    b.Property<byte>("Score")
+                        .HasColumnType("SMALLINT")
+                        .HasColumnName("score");
+
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("user_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("comment_and_test_score", (string)null);
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbOption", b =>
@@ -57,7 +99,8 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("QuestionId")
                         .IsRequired()
-                        .HasColumnType("VARCHAR");
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("question_id");
 
                     b.HasKey("Id");
 
@@ -78,20 +121,60 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("answer");
 
-                    b.Property<string>("DbTestId")
-                        .HasColumnType("VARCHAR");
-
                     b.Property<string>("Question")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR")
                         .HasColumnName("question");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DbTestId");
+                    b.HasIndex("TestId");
 
                     b.ToTable("question", (string)null);
+                });
+
+            modelBuilder.Entity("TestQuest.DataAccess.DbQuestionAnswer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("answer");
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("correct_answer");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("question_text");
+
+                    b.Property<string>("ResultTestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResultTestId");
+
+                    b.ToTable("question_answer", (string)null);
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbResultTest", b =>
@@ -108,16 +191,21 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnType("INT")
                         .HasColumnName("correct_answers");
 
-                    b.Property<string>("Result")
+                    b.Property<string>("ResultPoints")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR")
                         .HasColumnName("result");
 
+                    b.Property<string>("TestId")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("test_id");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("VARCHAR")
-                        .HasColumnName("id_user");
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -131,7 +219,8 @@ namespace TestQuest.DataAccess.Migrations
                         .HasColumnName("id");
 
                     b.Property<byte>("AgeLimit")
-                        .HasColumnType("smallint");
+                        .HasColumnType("SMALLINT")
+                        .HasColumnName("age_limit");
 
                     b.Property<string>("AuthorId")
                         .IsRequired()
@@ -144,7 +233,9 @@ namespace TestQuest.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("description");
 
                     b.Property<string>("Difficulty")
                         .IsRequired()
@@ -182,6 +273,12 @@ namespace TestQuest.DataAccess.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("VARCHAR")
                         .HasColumnName("id");
+
+                    b.Property<string>("AccessLevel")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("access_level");
 
                     b.Property<string[]>("Achievements")
                         .IsRequired()
@@ -244,23 +341,51 @@ namespace TestQuest.DataAccess.Migrations
                     b.Navigation("Test");
                 });
 
+            modelBuilder.Entity("TestQuest.DataAccess.DbCommentAndTestScore", b =>
+                {
+                    b.HasOne("TestQuest.DataAccess.DbTest", "Test")
+                        .WithMany("CommentAndTestScores")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("comment_and_test_scores");
+
+                    b.Navigation("Test");
+                });
+
             modelBuilder.Entity("TestQuest.DataAccess.DbOption", b =>
                 {
                     b.HasOne("TestQuest.DataAccess.DbQuestion", "Question")
                         .WithMany("Options")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("options");
+                        .IsRequired();
 
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>
                 {
-                    b.HasOne("TestQuest.DataAccess.DbTest", null)
+                    b.HasOne("TestQuest.DataAccess.DbTest", "Test")
                         .WithMany("Questions")
-                        .HasForeignKey("DbTestId");
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("comment_and_test_scores");
+
+                    b.Navigation("Test");
+                });
+
+            modelBuilder.Entity("TestQuest.DataAccess.DbQuestionAnswer", b =>
+                {
+                    b.HasOne("TestQuest.DataAccess.DbResultTest", "ResultTest")
+                        .WithMany("QuestionAnswers")
+                        .HasForeignKey("ResultTestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("result_test_id");
+
+                    b.Navigation("ResultTest");
                 });
 
             modelBuilder.Entity("TestQuest.DataAccess.DbQuestion", b =>
@@ -268,9 +393,16 @@ namespace TestQuest.DataAccess.Migrations
                     b.Navigation("Options");
                 });
 
+            modelBuilder.Entity("TestQuest.DataAccess.DbResultTest", b =>
+                {
+                    b.Navigation("QuestionAnswers");
+                });
+
             modelBuilder.Entity("TestQuest.DataAccess.DbTest", b =>
                 {
                     b.Navigation("Category");
+
+                    b.Navigation("CommentAndTestScores");
 
                     b.Navigation("Questions");
                 });

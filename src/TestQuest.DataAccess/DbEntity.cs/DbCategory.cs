@@ -1,6 +1,6 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbCategory : BaseDbEntity
+public record DbCategory : BaseDbEntity
 {
     private readonly string? _categories;
 
@@ -12,5 +12,5 @@ public sealed record DbCategory : BaseDbEntity
     }
 
     public string TestId { get; set; }
-    public DbTest Test { get; init; } = new();
+    public virtual DbTest Test { get; init; } = new();
 }

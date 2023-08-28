@@ -1,0 +1,134 @@
+@using TestQuest.DataAccess;
+@model ResultTestDto;
+
+@{
+    ViewData["Title"] = "Result test";
+}
+
+<div class="result-test">
+    <div class="result-text">
+        <h1>Result Test</h1>
+    </div>
+    <div class="points">
+        <h3>Points: @Model.ResultPoints</h3>
+    </div>
+    <div class="correct-answers">
+        <h3>Correct answers: @Model.CorrectAnswers</h3>
+    </div>
+    <div class="question-answers">
+        @foreach(var questionAnswers in Model.QuestionAnswers)
+        {
+            <div class="question-text">
+                <h2>Question: @questionAnswers.QuestionText</h2>
+            </div>
+            <div class="correct-answer">
+                <h3>Correct answers: @questionAnswers.CorrectAnswer</h3>
+            </div>
+            <div class="user-answer">
+                <h3>Your answers: @questionAnswers.Answer</h3>
+            </div>
+        }
+    </div>
+
+    <form asp-controller="Test" asp-action="CommentAndScoreTest" method="post" asp-route-id="@Model.TestId">
+        <h2>Score test</h2>
+        <select id="score" name="score" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <h1>Comment:</h1>
+        <textarea name="commenttext">Enter your message</textarea>
+        <button type="submit">To test</button>
+    </form>
+</div>
+
+<style>
+    select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 200px;
+        background-color: #fff;
+        color: #333;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: #5c9edb;
+        box-shadow: 0 0 5px rgba(92, 157, 219, 0.5);
+    }
+
+    option {
+        background-color: #fff;
+        color: #333;
+    }
+
+    option:hover {
+        background-color: #5c9edb;
+        color: #fff;
+    }
+
+    textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        resize: vertical;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease-in-out;
+        height: 250px;
+        width: 500px;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: #5c9edb;
+        box-shadow: 0 0 5px rgba(92, 157, 219, 0.5);
+    }
+
+    .result-test {
+        margin-left: 15%;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    
+    .result-text h1 {
+        margin-left: 35%;
+        color: black;
+        font-size: 28;
+    }
+    
+    .points h3,
+    .correct-answers h3 {
+        color: green;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .question-answers {
+        margin-top: 20px;
+    }
+    
+    .question-text h2 {
+        color: gray;
+        font-size: 16px;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .user-answer h3 {
+        color: red;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .correct-answer h3 {
+        color: green;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+</style>

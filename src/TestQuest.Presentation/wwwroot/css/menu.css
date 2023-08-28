@@ -104,8 +104,13 @@ body {
 
 .links li span {
     padding: 12px 10px;
+    color: black;
 }
 
+.menu{
+    color: black;
+    text-transform: none;
+}
 .links li a {
     padding: 10px;
     color: #000;

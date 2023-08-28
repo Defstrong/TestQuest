@@ -1,11 +1,11 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbResultTest : BaseDbEntity
+public record DbResultTest : BaseDbEntity
 {
     private readonly string? _userId;
     private readonly byte? _correctAnswers;
-    private readonly uint? _result;
-    private readonly DateTime? _completedAt;
+    private readonly uint? _resultPoints;
+    private readonly string? _testId;
 
     public string UserId
     {
@@ -13,24 +13,29 @@ public sealed record DbResultTest : BaseDbEntity
         init => _userId = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
+
+    public string TestId 
+    {
+        get => _testId ?? string.Empty;
+        init => _testId = value is { Length: > 0 }
+            ? value : throw new ArgumentOutOfRangeException(nameof(value));
+    }
+
     public byte CorrectAnswers
     {
         get => _correctAnswers ?? 0;
-        init => _correctAnswers = value > 0
+        init => _correctAnswers = value >= 0
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public uint Result
+    public uint ResultPoints
     {
-        get => _result ?? 0;
-        init => _result = value > 0
+        get => _resultPoints ?? 0;
+        init => _resultPoints = value >= 0
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
 
-    public DateTime CompletedAt
-    {
-        get => _completedAt ?? new DateTime();
-        init => _completedAt = value >= DateTime.Now
-            ? value : throw new ArgumentOutOfRangeException(nameof(value));
-    }
+    public DateTime CompletedAt { get; init; }
+
+    public virtual List<DbQuestionAnswer> QuestionAnswers { get; init; } = new();
 }

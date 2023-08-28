@@ -14,12 +14,16 @@ public sealed class OptionConfiguration : IEntityTypeConfiguration<DbOption>
         builder
             .Property(q => q.Id)
             .HasColumnName("id")
-            .HasColumnType("VARCHAR")
-            .IsRequired();
+            .HasColumnType("VARCHAR");
 
         builder
             .Property(q => q.Option)
             .HasColumnName("option")
+            .HasColumnType("VARCHAR");
+
+        builder
+            .Property(q => q.QuestionId)
+            .HasColumnName("question_id")
             .HasColumnType("VARCHAR")
             .IsRequired();
     }

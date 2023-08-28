@@ -1,6 +1,6 @@
 namespace TestQuest.DataAccess;
 
-public sealed record DbQuestion : BaseDbEntity
+public record DbQuestion : BaseDbEntity
 {
     private readonly string? _question;
     private readonly string? _answer;
@@ -23,6 +23,8 @@ public sealed record DbQuestion : BaseDbEntity
         init => _answer = value is { Length: > 0 }
             ? value : throw new ArgumentOutOfRangeException(nameof(value));
     }
+    public string TestId { get; set; }
 
-    public List<DbOption> Options { get; init; } = new();
+    public virtual DbTest Test { get; init; } = new();
+    public virtual List<DbOption> Options { get; init; } = new();
 }
