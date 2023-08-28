@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Proxies;
 namespace TestQuest.DataAccess;
 
 public sealed class TestQuestDbContext : DbContext

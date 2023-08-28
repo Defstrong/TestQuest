@@ -73,6 +73,10 @@ public sealed class ResultTestService : IResultTestService
         
         byte correctedAnswers = 0;
         var test = await _testService.GetAsync(testId, token);
+        
+        var anothertest = test.Questions.SelectMany(q =>q.Options);
+
+
         var questions = test.Questions.ToList();
         List<QuestionAnswerDto> questionAnswers = new();
         for(int i = 0; i < answers.Count(); i++)

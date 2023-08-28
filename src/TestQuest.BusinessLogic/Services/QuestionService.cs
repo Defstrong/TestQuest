@@ -28,8 +28,6 @@ public sealed class QuestionService : IQuestionService
     public async Task<bool> DeleteAsync(string id, CancellationToken token = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(id);
-        if(id == string.Empty || id == null)
-            throw new ArgumentException(nameof(id));
         bool deleteResult = await _questionRepository.DeleteAsync(id, token);
         return deleteResult;
     }

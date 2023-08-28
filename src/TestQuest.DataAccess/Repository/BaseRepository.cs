@@ -47,5 +47,6 @@ public class BaseRepository<T> : IBaseRepository<T>
         await CreateAsync(entity, token);
         int updateResult = await _db.SaveChangesAsync(token);
         return updateResult > 0;
+
     }
 }
